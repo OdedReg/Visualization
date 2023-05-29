@@ -2,6 +2,7 @@ import pandas as pd
 import streamlit as st
 import altair as alt
 import seaborn as sns
+import plotly.express as px
 
 
 df = pd.read_csv('Breast_Cancer.csv')
@@ -38,11 +39,12 @@ def build_heatmap():
     pivot_df = df.pivot_table(index=feature1, columns=feature2, values='Status',
                               aggfunc=lambda x: sum(x == 'Dead') / len(x))
 
-    # Create a heatmap using seaborn
-    heatmap = sns.heatmap(pivot_df, annot=True, cmap='coolwarm')
+    # Create a heatmap using Plotly Express
+    fig = px.imshow(pivot_df, color_continuous_scale='reds', labels=dict(color="Mortality rate (%)"))
+    fig.update_xaxes(side="top")
 
     # Display the heatmap in Streamlit
-    st.pyplot(heatmap.figure)
+    st.plotly_chart(fig)
 
 
 
