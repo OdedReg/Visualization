@@ -14,7 +14,7 @@ labels = ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69']
 df['Age'] = pd.cut(df['Age'], bins=bins, labels=labels)
 
 def build_st_query_for_line_charts(title: str, options: list):
-    feature = st.multiselect(f"Select {title}", options)
+    feature = st.Radio(f"Select {title}", options)
     return feature
 
 def build_heatmap():
@@ -26,7 +26,9 @@ def build_heatmap():
         feature1 = build_st_query_for_line_charts("First feature", options)
 
     with col2:
-        feature2 = build_st_query_for_line_charts("Second feature", options)
+        options2 = options
+        options2.remove(feature1)
+        feature2 = build_st_query_for_line_charts("Second feature", options2)
 
 st.title('Visualization of information - Final Project')
 build_heatmap()
