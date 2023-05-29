@@ -27,12 +27,12 @@ def build_heatmap():
 
     with col1:
         options_feature1 = ['Age', 'Race', 'Marital Status']
-        feature1 = build_st_query_for_line_charts("First feature", options_feature1)
+        feature1 = build_st_query_for_line_charts("first feature", options_feature1)
 
     with col2:
         options_feature2 = ['Age', 'Race', 'Marital Status']
         options_feature2.remove(feature1)
-        feature2 = build_st_query_for_line_charts("Second feature", options_feature2)
+        feature2 = build_st_query_for_line_charts("second feature", options_feature2)
 
 
     # Calculate the mortality rates based on the "Dead" values
@@ -42,11 +42,12 @@ def build_heatmap():
     # Create a heatmap using Plotly Express
     fig = px.imshow(pivot_df, color_continuous_scale='reds', labels=dict(color="Mortality rate (%)"))
     fig.update_xaxes(side="top")
-
+    fig.update_layout(height=600, width=800)
+    
     # Display the heatmap in Streamlit
     st.plotly_chart(fig)
 
 
 
-st.title('Visualization of information - Final Project')
+st.title('Visualization final project')
 build_heatmap()
