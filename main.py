@@ -1,7 +1,14 @@
 import pandas as pd
 import streamlit as st
 import altair as alt
+import subprocess
+
+# Install seaborn using pip
+subprocess.check_call(["pip", "install", "seaborn"])
+
+# Import seaborn after installation
 import seaborn as sns
+
 
 df = pd.read_csv('Breast_Cancer.csv')
 
