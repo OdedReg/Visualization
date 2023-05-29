@@ -33,11 +33,10 @@ def build_heatmap():
         options_feature2.remove(feature1)
         feature2 = build_st_query_for_line_charts("Second feature", options_feature2)
 
-    # Pivot the dataframe to calculate mortality rates
-    pivot_df = df.pivot_table(index=f'{feature1}', columns=f'{feature2}', values='Status', aggfunc='count')
 
     # Calculate the mortality rates based on the "Dead" values
-    mortality_rates = pivot_df.apply(lambda x: x['Dead'] / (x['Dead'] + x['Alive']), axis=1)
+    pivot_df = df.pivot_table(index=feature1, columns=feature2, values='Status',
+                              aggfunc=lambda x: sum(x == 'Dead') / len(x))
 
     # Create a heatmap using seaborn
     heatmap = sns.heatmap(pivot_df, annot=True, cmap='coolwarm')
