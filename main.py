@@ -37,13 +37,17 @@ def build_heatmap():
 
     # Calculate the mortality rates based on the "Dead" values
     pivot_df = df.pivot_table(index=feature1, columns=feature2, values='Status',
-                              aggfunc=lambda x: sum(x == 'Dead') / len(x))
+                              aggfunc=lambda x: round(sum(x == 'Dead') / len(x), 2))
 
     # Create a heatmap using Plotly Express
     fig = px.imshow(pivot_df, color_continuous_scale='reds', labels=dict(color="Mortality rate (%)"))
     fig.update_xaxes(side="top")
     fig.update_layout(height=600, width=800)
-    
+    fig.update_layout(
+        yaxis=dict(title=dict(text=f"{feature1}", font=dict(size=24)),
+                   xaxis=dict(title=dict(text=f"{feature2}", font=dict(size=24)),
+                              coloraxis_colorbar=dict(title=dict(text='Mortality rate (%)', font=dict(size=22))
+                                                      )
     # Display the heatmap in Streamlit
     st.plotly_chart(fig)
 
