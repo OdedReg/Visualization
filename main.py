@@ -14,7 +14,7 @@ labels = ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69']
 df['Age'] = pd.cut(df['Age'], bins=bins, labels=labels)
 
 def build_st_query_for_line_charts(title: str, options: list):
-    feature = st.Radio(f"Select {title}", options)
+    feature = st.radio(f"Select {title}", options)
     return feature
 
 def build_heatmap():
