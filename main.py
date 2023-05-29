@@ -47,7 +47,7 @@ def build_heatmap():
         yaxis=dict(title=dict(text=f"{feature1}", font=dict(size=24)),
                    xaxis=dict(title=dict(text=f"{feature2}", font=dict(size=24)),
                               coloraxis_colorbar=dict(title=dict(text='Mortality rate (%)', font=dict(size=22))
-                                                      )
+                                                      ))))
     # Display the heatmap in Streamlit
     st.plotly_chart(fig)
 
