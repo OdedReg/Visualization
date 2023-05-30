@@ -74,6 +74,6 @@ def build_heatmap():
 
 
 
-st.title('Visualization final project - Breast Cancer')
+st.title('Visualization final project -\nBreast Cancer')
 st.image(image)
 build_heatmap()
