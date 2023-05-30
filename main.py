@@ -30,7 +30,7 @@ def build_heatmap():
 
     col1 = st.columns(1)
 
-    with col1:
+    with col1[0]:
         options_feature1 = ['Age', 'Race', 'Marital Status']
         feature1 = build_st_query_for_line_charts("main feature", options_feature1)
 
@@ -40,7 +40,7 @@ def build_heatmap():
 
 
     col2 = st.columns(1)
-    with col2:
+    with col2[0]:
         options_feature2 = ['Age', 'Race', 'Marital Status']
         options_feature2.remove(feature1)
         feature2 = build_st_query_for_line_charts("secondary feature", options_feature2)
