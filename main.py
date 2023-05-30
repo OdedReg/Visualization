@@ -74,13 +74,9 @@ def build_heatmap():
 
 
 
-st.title("Visualization Final Project")
-
-subtitle_html = """
-    <div style="text-align: center; font-size: 18px;">
-        Breast Cancer
-    </div>
-"""
-st.markdown(subtitle_html, unsafe_allow_html=True)
+st.markdown("""
+    <h1 style='text-align: center;'>Visualization Final Project</h1>
+    """, unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center;'>Breast Cancer</h3>", unsafe_allow_html=True)
 st.image(image)
 build_heatmap()
