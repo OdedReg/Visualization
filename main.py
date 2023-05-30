@@ -81,6 +81,7 @@ def build_heatmap():
 
 
 def figure2():
+    st.subheader('Malignancy Rate and Average Tumor Size by Race')
     fig = go.Figure()
 
     fig.add_trace(go.Bar(
@@ -104,10 +105,9 @@ def figure2():
     ))
 
     fig.update_layout(
-        title=dict(text='Malignancy Rate and Average Tumor Size by Race'),
         xaxis=dict(title='Race', title_font=dict(size=20)),
-        yaxis=dict(title='Malignancy Rate (%)', title_font=dict(size=18)),
-        yaxis2=dict(title='Average Tumor Size (mm)', overlaying='y', side='right', title_font=dict(size=18)),
+        yaxis=dict(title='Malignancy Rate (%)', title_font=dict(size=16)),
+        yaxis2=dict(title='Average Tumor Size (mm)', overlaying='y', side='right', title_font=dict(size=16)),
         barmode='group',
         bargap=0.5  # Adjust the spacing between the bars
     )
