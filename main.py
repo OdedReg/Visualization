@@ -39,7 +39,7 @@ def build_heatmap():
     bar_fig = go.Figure()
 
     bar_fig.add_trace(go.Bar(
-          x=mortality_df[feature1],
+          x=mortality_df.index,
           y=mortality_df['Mortality Rate'],
           marker=dict(color='indianred')
       ))
@@ -48,12 +48,17 @@ def build_heatmap():
         xaxis=dict(title=dict(font=dict(size=24))))
     st.plotly_chart(bar_fig)
 
-    # bar_fig2 = px.bar(mortality_df, x=mortality_df.index, y='Mortality Rate', title=f'{"Mortality Rate by " + feature1}',
-    #                  color="lightsalmon")
-    # bar_fig2.update_layout(
-    #     yaxis=dict(title=dict(text="Mortality Rate (%)", font=dict(size=24))),
-    #     xaxis=dict(title=dict(font=dict(size=24))))
-    # st.plotly_chart(bar_fig2)
+    bar_fig2 = go.Figure()
+
+    bar_fig2.add_trace(go.Bar(
+        x=mortality_df.index,
+        y=mortality_df['Mortality Rate'],
+        marker=dict(color='lightsalmon')
+    ))
+    bar_fig.update_layout(
+        yaxis=dict(title=dict(text="Mortality Rate (%)", font=dict(size=24))),
+        xaxis=dict(title=dict(font=dict(size=24))))
+    st.plotly_chart(bar_fig2)
 
 
     col2 = st.columns(1)
