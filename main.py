@@ -8,14 +8,14 @@ import plotly.graph_objects as go
 
 df = pd.read_csv('Breast_Cancer.csv')
 
-# Define the age ranges
-bins = [0, 9, 19, 29, 39, 49, 59, 69]
+# Define the bin edges
+bin_edges = [30, 40, 50, 60, 70]
 
-# Define the corresponding labels for each range
-labels = ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69']
+# Define the corresponding bin labels
+bin_labels = ['30-39', '40-49', '50-59', '60-69']
 
-# Transform the 'Age' column into categorical ranges
-df['Age'] = pd.cut(df['Age'], bins=bins, labels=labels)
+# Convert numeric 'Age' to categorical using bins and labels
+df['Age'] = pd.cut(df['Age'], bins=bin_edges, labels=bin_labels, right=False)
 
 def get_mortality_rate(feature_name):
     mortality_df = df.groupby(feature_name)['Status'].value_counts().unstack().fillna(0)
