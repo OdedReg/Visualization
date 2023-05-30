@@ -106,8 +106,8 @@ def figure2():
     fig.update_layout(
         title=dict(text='Malignancy Rate and Average Tumor Size by Race'),
         xaxis=dict(title='Race', title_font=dict(size=20)),
-        yaxis=dict(title='Malignancy Rate (%)', font=dict(size=20)),
-        yaxis2=dict(title='Average Tumor Size (mm)', overlaying='y', side='right', font=dict(size=24)),
+        yaxis=dict(title='Malignancy Rate (%)', title_font=dict(size=20)),
+        yaxis2=dict(title='Average Tumor Size (mm)', overlaying='y', side='right', title_font=dict(size=24)),
         barmode='group',
         bargap=0.5  # Adjust the spacing between the bars
     )
