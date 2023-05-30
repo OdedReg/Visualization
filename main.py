@@ -18,6 +18,12 @@ bin_labels = ['30-39', '40-49', '50-59', '60-69']
 # Convert numeric 'Age' to categorical using bins and labels
 df['Age'] = pd.cut(df['Age'], bins=bin_edges, labels=bin_labels, right=False)
 
+
+agg_df = df.groupby('Race').agg(malignancy_rate=('A Stage', lambda x: sum(x == 'Distant') / len(x) * 100),
+                                    avg_tumor_size=('Tumor Size', 'mean')).reset_index()
+grouped_df = agg_df.sort_values(by=['Race'], key=lambda x: x.map({v: i for i, v in enumerate(['Other', 'White', 'Black'])}))
+
+
 def get_mortality_rate(feature_name):
     mortality_df = df.groupby(feature_name)['Status'].value_counts().unstack().fillna(0)
     mortality_df['Mortality Rate'] = mortality_df['Dead'] / (mortality_df['Dead'] + mortality_df['Alive'])
@@ -45,7 +51,8 @@ def build_heatmap():
           marker=dict(color='salmon')
       ))
     bar_fig.update_layout(
-        yaxis=dict(title=dict(text= "Mortality Rate (%)", font=dict(size=20))))
+        yaxis=dict(title=dict(text= "Mortality Rate (%)", font=dict(size=20))),
+        xaxis=dict(title=dict(text=f'{feature1}', font=dict(size=20))))
     st.plotly_chart(bar_fig)
 
 
@@ -73,6 +80,42 @@ def build_heatmap():
     st.plotly_chart(fig)
 
 
+def figure2():
+    fig = go.Figure()
+
+    fig.add_trace(go.Bar(
+        x=grouped_df['Race'],
+        y=grouped_df['malignancy_rate'],
+        name='Malignancy Rate',
+        yaxis='y',
+        offsetgroup=0,
+        width=0.25,
+        marker=dict(color='salmon')
+    ))
+
+    fig.add_trace(go.Bar(
+        x=grouped_df['Race'],
+        y=grouped_df['avg_tumor_size'],
+        name='Average Tumor Size',
+        yaxis='y2',
+        offsetgroup=1,
+        width=0.25,
+        marker=dict(color='lightseagreen')
+    ))
+
+    fig.update_layout(
+        title=dict(text='Malignancy Rate and Average Tumor Size by Race'),
+        xaxis=dict(title='Race', title_font=dict(size=20)),
+        yaxis=dict(title='Malignancy Rate (%)', font=dict(size=20)),
+        yaxis2=dict(title='Average Tumor Size (mm)', overlaying='y', side='right', font=dict(size=24)),
+        barmode='group',
+        bargap=0.5  # Adjust the spacing between the bars
+    )
+    st.plotly_chart(fig)
+
+
+
+
 
 st.markdown("""
     <h1 style='text-align: center;'>Visualization Final Project</h1>
@@ -80,3 +123,4 @@ st.markdown("""
 st.markdown("<h2 style='text-align: center;'>Breast Cancer</h2>", unsafe_allow_html=True)
 st.image(image)
 build_heatmap()
+figure2()
