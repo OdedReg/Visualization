@@ -4,8 +4,9 @@ import altair as alt
 import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
+from PIL import Image
 
-
+image = Image.open('dataset-cover.jpg')
 df = pd.read_csv('Breast_Cancer.csv')
 
 # Define the bin edges
@@ -74,4 +75,5 @@ def build_heatmap():
 
 
 st.title('Visualization final project')
+st.image(image)
 build_heatmap()
