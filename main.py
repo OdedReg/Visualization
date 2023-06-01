@@ -120,7 +120,7 @@ def figure3():
     survived_avg = survived.groupby(['Marital Status', 'Race', 'Age'])['Survival Months'].mean().reset_index()
     fig = px.bar(survived_avg, x="Marital Status", y="Survival Months", color="Race",
                  animation_frame="Age", animation_group="Marital Status", facet_col="Race", range_y=[0, 100])
-    fig.update_layout(yaxis=dict(title=dict(text="Average Survival Months")),height=600, width=800)
+    fig.update_layout(yaxis=dict(title=dict(text="Average Survival Months")),height=800, width=800)
 
     st.plotly_chart(fig)
 
