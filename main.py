@@ -127,11 +127,32 @@ def figure3():
                 type="buttons",
                 buttons=[
                     dict(
-                        args=[None, {"frame": {"duration": 1500}}]  # Adjust the frame duration here
-                    )
+                        label="Play",
+                        method="animate",
+                        args=[
+                            None,
+                            {
+                                "frame": {"duration": 1000},  # Frame duration for "Play" button
+                                "fromcurrent": True,
+                                "transition": {"duration": 500, "easing": "linear"},
+                            },
+                        ],
+                    ),
+                    dict(
+                        label="Stop",
+                        method="animate",
+                        args=[
+                            [None],
+                            {
+                                "frame": {"duration": 0},  # Frame duration for "Stop" button
+                                "mode": "immediate",
+                                "transition": {"duration": 0},
+                            },
+                        ],
+                    ),
                 ],
-            )
-        ]
+            ),
+        ],
     )
     st.plotly_chart(fig)
 
