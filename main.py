@@ -118,8 +118,10 @@ def figure3():
 
     survived = df[df['Status'] == 'Alive']
     survived_avg = survived.groupby(['Marital Status', 'Race', 'Age'])['Survival Months'].mean().reset_index()
+    color_scale = px.colors.qualitative.T10
+
     fig = px.bar(survived_avg, x="Marital Status", y="Survival Months", color="Race",
-                 animation_frame="Age", animation_group="Marital Status", facet_col="Race", range_y=[0, 100])
+                 animation_frame="Age", animation_group="Marital Status", facet_col="Race", range_y=[0, 100], color_discrete_sequence=color_scale)
     fig.update_layout(yaxis=dict(title=dict(text="Recovery Time (Months)")),height=600, width=900)
     fig.update_layout(
         updatemenus=[
