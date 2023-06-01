@@ -117,7 +117,9 @@ def figure3():
     st.subheader('Women with which characteristics are more likely to have a short recovery from breast cancer?')
 
     survived = df[df['Status'] == 'Alive']
-    fig = px.box(df, x="Marital Status", y="Survival Months", color="Race", animation_frame="Age", points="all")
+    survived_avg = survived.groupby(['Marital Status', 'Race', 'Age'])['Survival Months'].mean().reset_index()
+    fig = px.bar(survived_avg, x="Marital Status", y="Survival Months", color="Race",
+                 animation_frame="Age", animation_group="Marital Status", facet_col="Race", range_y=[0, 100])
     st.plotly_chart(fig)
 
 
@@ -132,4 +134,4 @@ st.image(image)
 build_heatmap()
 build_two_y_axis_chart()
 df = pd.read_csv('Breast_Cancer.csv')
-figure3()
+# figure3()
