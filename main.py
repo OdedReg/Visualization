@@ -80,7 +80,7 @@ def build_heatmap():
     st.plotly_chart(fig)
 
 
-def figure2():
+def build_two_y_axis_chart():
     st.subheader('Malignancy Rate and Average Tumor Size by Race')
     fig = go.Figure()
 
@@ -113,6 +113,14 @@ def figure2():
     )
     st.plotly_chart(fig)
 
+def figure3():
+    st.subheader('Women with which characteristics are more likely to have a short recovery from breast cancer?')
+
+    survived = df[df['Status'] == 'Alive']
+    fig = px.bar(survived, x="Race", y="Survival Months", color="Marital Status",
+                 animation_frame="Age", facet_col="Marital Status")
+    st.plotly_chart(fig)
+
 
 
 
@@ -123,4 +131,5 @@ st.markdown("""
 st.markdown("<h2 style='text-align: center;'>Breast Cancer</h2>", unsafe_allow_html=True)
 st.image(image)
 build_heatmap()
-figure2()
+build_two_y_axis_chart()
+figure3()
