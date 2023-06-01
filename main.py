@@ -117,8 +117,7 @@ def figure3():
     st.subheader('Women with which characteristics are more likely to have a short recovery from breast cancer?')
 
     survived = df[df['Status'] == 'Alive']
-    fig = px.bar(survived, x="Race", y="Survival Months", color="Marital Status",
-                 animation_frame="Age", facet_col="Marital Status")
+    fig = px.box(df, x="Marital Status", y="Survival Months", color="Race", animation_frame="Age", points="all")
     st.plotly_chart(fig)
 
 
