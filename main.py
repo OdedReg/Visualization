@@ -133,5 +133,4 @@ st.markdown("<h2 style='text-align: center;'>Breast Cancer</h2>", unsafe_allow_h
 st.image(image)
 build_heatmap()
 build_two_y_axis_chart()
-df = pd.read_csv('Breast_Cancer.csv')
 figure3()
