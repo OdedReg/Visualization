@@ -176,9 +176,6 @@ def build_two_y_axis_chart():
 def figure3():
     st.subheader('Women with which characteristics are more likely to have a short recovery from breast cancer?')
     fig = go.Figure()
-    age = df['Age'].unique()
-    race = df['Race'].unique()
-    marital = df['Marital Status'].unique()
 
     grouped = df.groupby(['Age', 'Race', 'Marital Status']).size().reset_index(name='count')
     filtered_groups = grouped[grouped['count'] >= 2]
@@ -205,20 +202,11 @@ def figure3():
                                     meanline_visible=True))
             i += 1
 
-    for i, row in filtered_groups.iterrows():
-        age = row['Age']
-        race = row['Race']
-        marital_status = row['Marital Status']
-        fig.add_annotation(x=145, y=i, xref="x", yref="y", ax=0, ay=0,
-                           xshift=50,
-                           showarrow=True, arrowhead=1, arrowcolor='black', arrowsize=1)
-
     fig.update_layout(legend=dict(traceorder='reversed', itemsizing='constant'))
     fig.update_traces(orientation='h', side='positive', width=5, points=False)
     fig.update_layout(xaxis_showgrid=False, xaxis_zeroline=False, xaxis_title='Survival Months')
     fig.update_layout(violinmode='group', height=1000, xaxis_range=[0, 145])
     fig.update_layout(yaxis=dict(showticklabels=False))  # Remove y-axis tick labels
-
     st.plotly_chart(fig)
 
 st.markdown("""
