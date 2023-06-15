@@ -39,7 +39,7 @@ def build_st_query_for_ridge_charts(title: str, options: list):
     st.write(f"## {title}")
     checkbox_states = {}
     # Add "Select All" checkbox
-    select_all = st.checkbox("<span style='font-weight:bold;'>Select All</span>", unsafe_allow_html=True)
+    select_all = st.checkbox("<span style='font-weight:bold;'>Select All</span>")
     if select_all:
         for option in options:
             checkbox_states[option] = True
