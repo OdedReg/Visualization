@@ -47,8 +47,14 @@ def build_st_query_for_ridge_charts(title: str, options: list):
         select_all = st.checkbox("Select All Marital Statuses")
     checkbox_states = {}  # Dictionary to store checkbox states
 
-    for option in options:
-        checkbox_states[option] = st.checkbox(option)
+    if select_all:
+        for option in options:
+            checkbox_key = f"{option} ({title})"
+            checkbox_states[option] = st.checkbox(option, key=checkbox_key, value=True)
+    else:
+        for option in options:
+            checkbox_key = f"{option} ({title})"
+            checkbox_states[option] = st.checkbox(option, key=checkbox_key, value=checkbox_states.get(option, False))
 
     return checkbox_states
 
@@ -192,8 +198,9 @@ def build_two_y_axis_chart():
 
 def figure3():
     st.subheader('Women with which characteristics are more likely to have a short recovery from breast cancer?')
-    col1, col2, col3 = st.columns(3)
     st.markdown('### Select Characteristics')
+    col1, col2, col3 = st.columns(3)
+
 
     with col1:
         age_dict = build_st_query_for_ridge_charts(
