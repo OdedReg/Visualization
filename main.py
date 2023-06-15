@@ -5,6 +5,7 @@ import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
 from PIL import Image
+from matplotlib import cm
 
 image = Image.open('dataset-cover.jpg')
 df = pd.read_csv('Breast_Cancer.csv')
@@ -32,6 +33,19 @@ def get_mortality_rate(feature_name):
 def build_st_query_for_line_charts(title: str, options: list):
     feature = st.radio(f'Select {title}', options)
     return feature
+
+def create_virdis(num):
+    viridis = cm.get_cmap('viridis', 12)
+    virdis_list = viridis(np.linspace(0, 1, num))
+
+    modified_array = []
+    for lst in virdis_list:
+        modified_list = lst[:-1]  # Remove the last element from the list
+        rgb_string = f'rgb({modified_list[0]}, {modified_list[1]}, {modified_list[2]})'
+        modified_array.append(rgb_string)
+
+    return modified_array
+
 
 def build_heatmap():
     st.subheader('Impact of demographic characteristics on the mortality of women with breast cancer in America')
@@ -113,54 +127,85 @@ def build_two_y_axis_chart():
     )
     st.plotly_chart(fig)
 
+# def figure3():
+#     st.subheader('Women with which characteristics are more likely to have a short recovery from breast cancer?')
+#
+#     survived = df[df['Status'] == 'Alive']
+#     survived_avg = survived.groupby(['Marital Status', 'Race', 'Age'])['Survival Months'].mean().reset_index()
+#     color_scale = px.colors.qualitative.T10
+#
+#     fig = px.bar(survived_avg, x="Marital Status", y="Survival Months", color="Race",
+#                  animation_frame="Age", animation_group="Marital Status", facet_col="Race", range_y=[0, 100], color_discrete_sequence=color_scale)
+#     fig.update_layout(yaxis=dict(title=dict(text="Recovery Time (Months)")),height=600, width=900)
+#     fig.update_layout(
+#         updatemenus=[
+#             dict(
+#                 type="buttons",
+#                 buttons=[
+#                     dict(
+#                         label="Play",
+#                         method="animate",
+#                         args=[
+#                             None,
+#                             {
+#                                 "frame": {"duration": 1000},  # Frame duration for "Play" button
+#                                 "fromcurrent": True,
+#                                 "transition": {"duration": 500, "easing": "linear"},
+#                             },
+#                         ],
+#                     ),
+#                     dict(
+#                         label="Stop",
+#                         method="animate",
+#                         args=[
+#                             [None],
+#                             {
+#                                 "frame": {"duration": 0},  # Frame duration for "Stop" button
+#                                 "mode": "immediate",
+#                                 "transition": {"duration": 0},
+#                             },
+#                         ],
+#                     ),
+#                 ],
+#             ),
+#         ],
+#     )
+#     st.plotly_chart(fig)
+
 def figure3():
     st.subheader('Women with which characteristics are more likely to have a short recovery from breast cancer?')
+    fig = go.Figure()
+    age = df['Age'].unique()
+    race = df['Race'].unique()
+    marital = df['Marital Status'].unique()
+    num_of_colors = len(age) * len(race) * len(marital)
+    colors = create_virdis(num_of_colors)
+    i = 0
 
-    survived = df[df['Status'] == 'Alive']
-    survived_avg = survived.groupby(['Marital Status', 'Race', 'Age'])['Survival Months'].mean().reset_index()
-    color_scale = px.colors.qualitative.T10
+    grouped = df.groupby(['Age', 'Race', 'Marital Status'])['Survival Months'].mean().reset_index()
 
-    fig = px.bar(survived_avg, x="Marital Status", y="Survival Months", color="Race",
-                 animation_frame="Age", animation_group="Marital Status", facet_col="Race", range_y=[0, 100], color_discrete_sequence=color_scale)
-    fig.update_layout(yaxis=dict(title=dict(text="Recovery Time (Months)")),height=600, width=900)
-    fig.update_layout(
-        updatemenus=[
-            dict(
-                type="buttons",
-                buttons=[
-                    dict(
-                        label="Play",
-                        method="animate",
-                        args=[
-                            None,
-                            {
-                                "frame": {"duration": 1000},  # Frame duration for "Play" button
-                                "fromcurrent": True,
-                                "transition": {"duration": 500, "easing": "linear"},
-                            },
-                        ],
-                    ),
-                    dict(
-                        label="Stop",
-                        method="animate",
-                        args=[
-                            [None],
-                            {
-                                "frame": {"duration": 0},  # Frame duration for "Stop" button
-                                "mode": "immediate",
-                                "transition": {"duration": 0},
-                            },
-                        ],
-                    ),
-                ],
-            ),
-        ],
-    )
+    # Sort the groups by the mean survival months in descending order
+    sorted_groups = grouped.sort_values('Survival Months', ascending=True)
+
+    # Iterate through each group
+    for _, row in sorted_groups.iterrows():
+        age = row['Age']
+        race = row['Race']
+        marital_status = row['Marital Status']
+        values = df[(df['Age'] == age) & (df['Race'] == race) & (df['Marital Status'] == marital_status)][
+            'Survival Months']
+        if len(values) > 0:
+            fig.add_trace(go.Violin(x=values, line_color=colors[i], name=f'{age}, {race}, {marital_status}',
+                                    meanline_visible=True))
+            i += 1
+
+    fig.update_layout(legend=dict(traceorder='reversed', itemsizing='constant'))
+    fig.update_traces(orientation='h', side='positive', width=5, points=False)
+    fig.update_layout(xaxis_showgrid=False, xaxis_zeroline=False, xaxis_title='Survival Months')
+    fig.update_layout(violinmode='group', height=1400, xaxis_range=[0, 145])
+    fig.update_layout(yaxis=dict(showticklabels=False))  # Remove y-axis tick labels
+
     st.plotly_chart(fig)
-
-
-
-
 
 st.markdown("""
     <h1 style='text-align: center;'>Visualization Final Project</h1>
