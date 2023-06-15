@@ -212,7 +212,7 @@ def figure3():
             "Race", ['White', 'Black', 'Other']
         )
 
-    with col1:
+    with col3:
         marital_dict = build_st_query_for_ridge_charts(
             "Marital Status", ['Married', 'Divorced', 'Single ', 'Widowed', 'Separated']
         )
