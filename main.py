@@ -6,6 +6,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from PIL import Image
 from matplotlib import cm
+import numpy as np
 
 image = Image.open('dataset-cover.jpg')
 df = pd.read_csv('Breast_Cancer.csv')
