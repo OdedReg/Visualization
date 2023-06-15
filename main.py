@@ -35,6 +35,20 @@ def build_st_query_for_line_charts(title: str, options: list):
     feature = st.radio(f'Select {title}', options)
     return feature
 
+def build_st_query_for_ridge_charts(title: str, options: list):
+    st.write(f"## {title}")
+    checkbox_states = {}
+    # Add "Select All" checkbox
+    select_all = st.checkbox("<span style='font-weight:bold;'>Select All</span>", unsafe_allow_html=True)
+    if select_all:
+        for option in options:
+            checkbox_states[option] = True
+    else:
+        for option in options:
+            checkbox_states[option] = st.checkbox(option, value=checkbox_states.get(option, False))
+
+    return checkbox_states
+
 def create_virdis(num):
     viridis = cm.get_cmap('viridis', 12)
     virdis_list = viridis(np.linspace(0, 1, num))
@@ -175,6 +189,24 @@ def build_two_y_axis_chart():
 
 def figure3():
     st.subheader('Women with which characteristics are more likely to have a short recovery from breast cancer?')
+    col1, col2, col3 = st.columns(3)
+    st.markdown('### Select Characteristics')
+
+    with col1:
+        age_dict = build_st_query_for_ridge_charts(
+            "Age", [ '30-39', '40-49', '50-59', '60-69']
+        )
+
+    with col2:
+        race_dict = build_st_query_for_ridge_charts(
+            "Race", ['White', 'Black', 'Other']
+        )
+
+    with col1:
+        marital_dict = build_st_query_for_ridge_charts(
+            "Marital Status", ['Married', 'Divorced', 'Single ', 'Widowed', 'Separated']
+        )
+
     fig = go.Figure()
 
     grouped = df.groupby(['Age', 'Race', 'Marital Status']).size().reset_index(name='count')
