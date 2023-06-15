@@ -39,7 +39,12 @@ def build_st_query_for_ridge_charts(title: str, options: list):
     st.write(f"## {title}")
     checkbox_states = {}
     # Add "Select All" checkbox
-    select_all = st.checkbox("<span style='font-weight:bold;'>Select All</span>")
+    if title == 'Age':
+        select_all = st.checkbox("<span style='font-weight:bold;'>Select All Ages</span>")
+    elif title == 'Race':
+        select_all = st.checkbox("<span style='font-weight:bold;'>Select All Races</span>")
+    else:
+        select_all = st.checkbox("<span style='font-weight:bold;'>Select All Marital Statuses</span>")
     checkbox_states = {}  # Dictionary to store checkbox states
 
     for option in options:
@@ -192,7 +197,7 @@ def figure3():
 
     with col1:
         age_dict = build_st_query_for_ridge_charts(
-            "Age", [ '30-39', '40-49', '50-59', '60-69']
+            "Age", ['30-39', '40-49', '50-59', '60-69']
         )
 
     with col2:
