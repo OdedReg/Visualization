@@ -179,11 +179,15 @@ def figure3():
     age = df['Age'].unique()
     race = df['Race'].unique()
     marital = df['Marital Status'].unique()
-    num_of_colors = len(age) * len(race) * len(marital)
+
+    grouped = df.groupby(['Age', 'Race', 'Marital Status']).size().reset_index(name='count')
+    filtered_groups = grouped[grouped['count'] >= 2]
+    num_of_colors = len(filtered_groups)
     colors = create_virdis(num_of_colors)
     i = 0
 
-    grouped = df.groupby(['Age', 'Race', 'Marital Status'])['Survival Months'].mean().reset_index()
+    survived = df[df['Status'] == 'Alive']
+    grouped = survived.groupby(['Age', 'Race', 'Marital Status'])['Survival Months'].mean().reset_index()
 
     # Sort the groups by the mean survival months in descending order
     sorted_groups = grouped.sort_values('Survival Months', ascending=True)
@@ -193,9 +197,10 @@ def figure3():
         age = row['Age']
         race = row['Race']
         marital_status = row['Marital Status']
-        values = df[(df['Age'] == age) & (df['Race'] == race) & (df['Marital Status'] == marital_status)][
+        values = survived[
+            (survived['Age'] == age) & (survived['Race'] == race) & (survived['Marital Status'] == marital_status)][
             'Survival Months']
-        if len(values) > 0:
+        if len(values) > 1:
             fig.add_trace(go.Violin(x=values, line_color=colors[i], name=f'{age}, {race}, {marital_status}',
                                     meanline_visible=True))
             i += 1
