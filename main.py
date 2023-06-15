@@ -39,14 +39,14 @@ def build_st_query_for_ridge_charts(title: str, options: list):
     st.write(f"#### {title}")
     checkbox_states = {}
     # Add "Select All" checkbox
-    # if title == 'Age':
-    #     select_all = st.checkbox("All Ages")
-    # elif title == 'Race':
-    #     select_all = st.checkbox("All Races")
-    # else:
-    #     select_all = st.checkbox("All Marital Statuses")
+    if title == 'Age':
+        select_all = st.checkbox("All Ages")
+    elif title == 'Race':
+        select_all = st.checkbox("All Races")
+    else:
+        select_all = st.checkbox("All Marital Statuses")
     checkbox_states = {}  # Dictionary to store checkbox states
-    select_all = False
+
     if select_all:
         for option in options:
             checkbox_key = f"{option} ({title})"
@@ -96,7 +96,7 @@ def build_heatmap():
 
     col2 = st.columns(1)
     with col2[0]:
-        options_feature2 = ['Age', 'Race', 'Marital']
+        options_feature2 = ['Age', 'Race', 'Marital Status']
         options_feature2.remove(feature1)
         feature2 = build_st_query_for_line_charts("secondary feature", options_feature2)
 
@@ -199,7 +199,7 @@ def build_two_y_axis_chart():
 def figure3():
     st.subheader('Women with which characteristics are more likely to have a short recovery from breast cancer?')
     st.markdown('### Select Characteristics')
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3 = st.beta_columns(3)
 
 
     with col1:
