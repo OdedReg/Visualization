@@ -36,15 +36,15 @@ def build_st_query_for_line_charts(title: str, options: list):
     return feature
 
 def build_st_query_for_ridge_charts(title: str, options: list):
-    st.write(f"## {title}")
+    st.write(f"### {title}")
     checkbox_states = {}
     # Add "Select All" checkbox
     if title == 'Age':
-        select_all = st.checkbox("<span style='font-weight:bold;'>Select All Ages</span>")
+        select_all = st.checkbox("Select All Ages")
     elif title == 'Race':
-        select_all = st.checkbox("<span style='font-weight:bold;'>Select All Races</span>")
+        select_all = st.checkbox("Select All Races")
     else:
-        select_all = st.checkbox("<span style='font-weight:bold;'>Select All Marital Statuses</span>")
+        select_all = st.checkbox("Select All Marital Statuses")
     checkbox_states = {}  # Dictionary to store checkbox states
 
     for option in options:
