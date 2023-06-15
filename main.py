@@ -208,7 +208,7 @@ def figure3():
     fig.update_layout(legend=dict(traceorder='reversed', itemsizing='constant'))
     fig.update_traces(orientation='h', side='positive', width=5, points=False)
     fig.update_layout(xaxis_showgrid=False, xaxis_zeroline=False, xaxis_title='Survival Months')
-    fig.update_layout(violinmode='group', height=1400, xaxis_range=[0, 145])
+    fig.update_layout(violinmode='group', height=1000, xaxis_range=[0, 145])
     fig.update_layout(yaxis=dict(showticklabels=False))  # Remove y-axis tick labels
 
     st.plotly_chart(fig)
