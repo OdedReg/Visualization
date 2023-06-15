@@ -40,11 +40,11 @@ def build_st_query_for_ridge_charts(title: str, options: list):
     checkbox_states = {}
     # Add "Select All" checkbox
     if title == 'Age':
-        select_all = st.checkbox("Select All Ages")
+        select_all = st.checkbox("All Ages")
     elif title == 'Race':
-        select_all = st.checkbox("Select All Races")
+        select_all = st.checkbox("All Races")
     else:
-        select_all = st.checkbox("Select All Marital Statuses")
+        select_all = st.checkbox("All Marital Statuses")
     checkbox_states = {}  # Dictionary to store checkbox states
 
     if select_all:
@@ -199,7 +199,7 @@ def build_two_y_axis_chart():
 def figure3():
     st.subheader('Women with which characteristics are more likely to have a short recovery from breast cancer?')
     st.markdown('### Select Characteristics')
-    col1, col2, col3 = st.columns([1, 1, 1])
+    col1, col2, col3 = st.columns(3)
 
 
     with col1:
