@@ -222,7 +222,7 @@ def figure3():
     grouped = df.groupby(['Age', 'Race', 'Marital Status']).size().reset_index(name='count')
     filtered_groups = grouped[grouped['count'] >= 2]
     num_of_colors = len(filtered_groups)
-    colors = create_virdis(num_of_colors)
+    colors = create_virdis(num_of_colors)[::-1]
     i = 0
 
     survived = df[df['Status'] == 'Alive']
