@@ -199,7 +199,7 @@ def build_two_y_axis_chart():
 def figure3():
     st.subheader('Women with which characteristics are more likely to have a short recovery from breast cancer?')
     st.markdown('### Select Characteristics')
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3 = st.columns([1, 1, 1])
 
 
     with col1:
