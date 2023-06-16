@@ -296,13 +296,13 @@ def figure3():
     ridge = create_ridge(age_dict, race_dict, marital_dict)
     st.plotly_chart(ridge)
 
-    age_graph = create_km_graph('Age')
+    age_graph = create_km_graph('Age', age_dict)
     st.plotly_chart(age_graph)
 
-    race_graph = create_km_graph('Race')
+    race_graph = create_km_graph('Race', race_dict)
     st.plotly_chart(race_graph)
 
-    marital_graph = create_km_graph('Marital Status')
+    marital_graph = create_km_graph('Marital Status', marital_dict)
     st.plotly_chart(marital_graph)
 
 
