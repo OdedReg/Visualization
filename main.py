@@ -58,6 +58,10 @@ def build_st_query_for_ridge_charts(title: str, options: list):
 
     return checkbox_states
 
+def get_checkbox_list(checkbox_dict):
+    return [key for key, val in checkbox_dict.items() if val]
+
+
 def create_virdis(num):
     viridis = cm.get_cmap('viridis', 12)
     virdis_list = viridis(np.linspace(0, 1, num))
@@ -218,33 +222,54 @@ def figure3():
         )
 
     fig = go.Figure()
-
     survived = df[df['Status'] == 'Alive']
-    grouped = survived[
-        survived['Age'].isin(age_dict.values()) &
-        survived['Race'].isin(race_dict.values()) &
-        survived['Marital Status'].isin(marital_dict.values())
-        ]
-    grouped = grouped.groupby(['Age', 'Race', 'Marital Status']).agg(
-        {'Survival Months': ['mean', 'count']}).reset_index()
-    grouped.columns = ['Age', 'Race', 'Marital Status', 'mean_survival_months', 'count']
-    grouped = grouped[grouped['count'] >= 2]
-    grouped = grouped.sort_values('mean_survival_months', ascending=False)
 
-    num_of_colors = len(grouped)
-    colors = create_virdis(num_of_colors)
-    i = 0
+    age_list = [key for key, val in age_dict.items() if val]
+    race_list = [key for key, val in race_dict.items() if val]
+    marital_list = [key for key, val in marital_dict.items() if val]
 
-    # Iterate through each group
-    for _, row in grouped.iterrows():
-        age = row['Age']
-        race = row['Race']
-        marital_status = row['Marital Status']
-        values = survived[
-            (survived['Age'] == age) & (survived['Race'] == race) & (survived['Marital Status'] == marital_status)][
-            'Survival Months']
-        if len(values) > 1:
-            fig.add_trace(go.Violin(x=values, line_color=colors[i], name=f'{age}, {race}, {marital_status}',
+    grouped = survived
+    group_by_list = []
+    if age_list:
+        grouped = grouped[grouped['Age'].isin(age_list)]
+        group_by_list.append('Age')
+    if race_list:
+        grouped = grouped[grouped['Race'].isin(race_list)]
+        group_by_list.append('Race')
+    if marital_list:
+        grouped = grouped[grouped['Marital Status'].isin(marital_list)]
+        group_by_list.append('Marital Status')
+
+    if age_list or race_list or marital_list:
+        grouped = grouped.groupby(group_by_list).agg(
+            {'Survival Months': ['mean', 'count']}).reset_index()
+        grouped = grouped[grouped['Survival Months']['count'] >= 2]
+        grouped = grouped.sort_values(by=[('Survival Months', 'mean')], ascending=False)
+
+        num_of_colors = len(grouped)
+        colors = create_virdis(num_of_colors)
+        i = 0
+
+        # Iterate through each group
+        for _, row in grouped.iterrows():
+            columns_names = grouped.columns.tolist()
+            name = ""
+            survived_copy = survived.copy()
+            if age_list:
+                age = row['Age'][0]
+                survived_copy = survived_copy[(survived_copy['Age'] == age)]
+                name += f'{age},'
+            if race_list:
+                race = row['Race'][0]
+                survived_copy = survived_copy[(survived_copy['Race'] == race)]
+                name += f'{race},'
+            if marital_list:
+                marital_status = row['Marital Status'][0]
+                survived_copy = survived_copy[(survived_copy['Marital Status'] == marital_status)]
+                name += f'{marital_status},'
+            values = survived_copy['Survival Months']
+            name = name[:len(name) - 1]
+            fig.add_trace(go.Violin(x=values, line_color=colors[i], name=name,
                                     meanline_visible=True))
             i += 1
 
@@ -253,7 +278,6 @@ def figure3():
     fig.update_layout(xaxis_showgrid=False, xaxis_zeroline=False, xaxis_title='Time to Recover (Months)')
     fig.update_layout(violinmode='group', width=800, height=1000, xaxis_range=[0, 145])
     fig.update_layout(yaxis=dict(showticklabels=False))  # Remove y-axis tick labels
-    st.plotly_chart(fig)
 
 st.markdown("""
     <h1 style='text-align: center;'>Visualization Final Project</h1>
