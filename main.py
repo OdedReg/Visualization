@@ -220,43 +220,42 @@ def create_ridge(age_dict, race_dict, marital_dict):
     return fig
 
 
-def create_km_graph(name):
+def create_km_graph(name, name_dict):
     fig = go.Figure()
 
     survived = df.copy()
     survived['Status'] = survived['Status'].map({'Alive': 1, 'Dead': 0})
 
-    if name == 'Age':
-        n_colors = 4
-    elif name == 'Race':
-        n_colors = 3
-    else:
-        n_colors = 5
+    name_list = [key for key, val in name_dict.items() if val]
+    if name_list:
+        survived = survived[survived['Age'].isin(name_list)]
 
-    # Define a color palette with different colors
-    color_palette = create_virdis(n_colors)
+        n_colors = len(survived[name].unique())
 
-    for i, value in enumerate(survived[name].unique()):
-        kmf = KaplanMeierFitter()
+        # Define a color palette with different colors
+        color_palette = create_virdis(n_colors)
 
-        # Filter data for the current value
-        group_survived = survived[survived[name] == value]
+        for i, value in enumerate(survived[name].unique()):
+            kmf = KaplanMeierFitter()
 
-        survival_time = group_survived['Survival Months']
-        status = group_survived['Status']
+            # Filter data for the current value
+            group_survived = survived[survived[name] == value]
 
-        kmf.fit(survival_time, status)
-        survival_probs = kmf.survival_function_
+            survival_time = group_survived['Survival Months']
+            status = group_survived['Status']
 
-        # Flip the survival probabilities
-        survival_probs['KM_estimate'] = 1 - survival_probs['KM_estimate']
+            kmf.fit(survival_time, status)
+            survival_probs = kmf.survival_function_
 
-        fig.add_trace(go.Scatter(
-            x=kmf.survival_function_.index, y=kmf.survival_function_['KM_estimate'],
-            mode='lines',  # Update the mode to 'lines'
-            line=dict(shape='hv', width=3, color=color_palette[i]),
-            name=value
-        ))
+            # Flip the survival probabilities
+            survival_probs['KM_estimate'] = 1 - survival_probs['KM_estimate']
+
+            fig.add_trace(go.Scatter(
+                x=kmf.survival_function_.index, y=kmf.survival_function_['KM_estimate'],
+                mode='lines',  # Update the mode to 'lines'
+                line=dict(shape='hv', width=3, color=color_palette[i]),
+                name=value
+            ))
 
     fig.update_layout(
         title=f'Kaplan-Meier Recovery Curve By {name}',
