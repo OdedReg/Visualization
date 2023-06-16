@@ -228,7 +228,7 @@ def create_km_graph(name, name_dict):
 
     name_list = [key for key, val in name_dict.items() if val]
     if name_list:
-        survived = survived[survived['Age'].isin(name_list)]
+        survived = survived[survived[name].isin(name_list)]
 
         n_colors = len(survived[name].unique())
 
