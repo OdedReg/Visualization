@@ -224,7 +224,6 @@ def create_km_graph(name):
     fig = go.Figure()
 
     survived = df.copy()
-    survived = survived[survived['Survival Months'] <= 60]
     survived['Status'] = survived['Status'].map({'Alive': 1, 'Dead': 0})
 
     if name == 'Age':
