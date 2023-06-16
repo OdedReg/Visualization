@@ -279,6 +279,8 @@ def figure3():
     fig.update_layout(violinmode='group', width=800, height=1000, xaxis_range=[0, 145])
     fig.update_layout(yaxis=dict(showticklabels=False))  # Remove y-axis tick labels
 
+    st.plotly_chart(fig)
+
 st.markdown("""
     <h1 style='text-align: center;'>Visualization Final Project</h1>
     """, unsafe_allow_html=True)
