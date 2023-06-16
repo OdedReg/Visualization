@@ -237,14 +237,14 @@ def create_km_graph(name):
     # Define a color palette with different colors
     color_palette = create_virdis(n_colors)
 
-    for i, race_value in enumerate(survived[name].unique()):
+    for i, value in enumerate(survived[name].unique()):
         kmf = KaplanMeierFitter()
 
-        # Filter data for the current race value
-        race_survived = survived[survived[name] == race_value]
+        # Filter data for the current value
+        group_survived = survived[survived[name] == value]
 
-        survival_time = race_survived['Survival Months']
-        status = race_survived['Status']
+        survival_time = group_survived['Survival Months']
+        status = group_survived['Status']
 
         kmf.fit(survival_time, status)
         survival_probs = kmf.survival_function_
@@ -254,8 +254,9 @@ def create_km_graph(name):
 
         fig.add_trace(go.Scatter(
             x=kmf.survival_function_.index, y=kmf.survival_function_['KM_estimate'],
-            line=dict(shape='hv', width=3, color=color_palette[i % len(color_palette)]),
-            name=race_value
+            mode='lines',  # Update the mode to 'lines'
+            line=dict(shape='hv', width=3, color=color_palette[i]),
+            name=value
         ))
 
     fig.update_layout(
@@ -271,50 +272,6 @@ def create_km_graph(name):
 
     return fig
 
-# def figure3():
-#     st.subheader('Women with which characteristics are more likely to have a short recovery from breast cancer?')
-#
-#     survived = df[df['Status'] == 'Alive']
-#     survived_avg = survived.groupby(['Marital Status', 'Race', 'Age'])['Survival Months'].mean().reset_index()
-#     color_scale = px.colors.qualitative.T10
-#
-#     fig = px.bar(survived_avg, x="Marital Status", y="Survival Months", color="Race",
-#                  animation_frame="Age", animation_group="Marital Status", facet_col="Race", range_y=[0, 100], color_discrete_sequence=color_scale)
-#     fig.update_layout(yaxis=dict(title=dict(text="Recovery Time (Months)")),height=600, width=900)
-#     fig.update_layout(
-#         updatemenus=[
-#             dict(
-#                 type="buttons",
-#                 buttons=[
-#                     dict(
-#                         label="Play",
-#                         method="animate",
-#                         args=[
-#                             None,
-#                             {
-#                                 "frame": {"duration": 1000},  # Frame duration for "Play" button
-#                                 "fromcurrent": True,
-#                                 "transition": {"duration": 500, "easing": "linear"},
-#                             },
-#                         ],
-#                     ),
-#                     dict(
-#                         label="Stop",
-#                         method="animate",
-#                         args=[
-#                             [None],
-#                             {
-#                                 "frame": {"duration": 0},  # Frame duration for "Stop" button
-#                                 "mode": "immediate",
-#                                 "transition": {"duration": 0},
-#                             },
-#                         ],
-#                     ),
-#                 ],
-#             ),
-#         ],
-#     )
-#     st.plotly_chart(fig)
 
 def figure3():
     st.subheader('Women with which characteristics are more likely to have a short recovery from breast cancer?')
