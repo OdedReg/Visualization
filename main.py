@@ -268,7 +268,7 @@ def create_km_graph(name):
             traceorder="reversed"
         )
     )
-    fig.update_layout(width=700, height=300, xaxis_range=[0, 60])
+    fig.update_layout(width=700, height=400, xaxis_range=[0, 60], yaxis_range=[0, 0.25])
 
     return fig
 
