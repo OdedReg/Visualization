@@ -294,17 +294,23 @@ def figure3():
             "Marital Status", ['Married', 'Divorced', 'Single ', 'Widowed', 'Separated']
         )
 
+    col4, col5, col6 = st.columns(3)
+    with col4:
+        age_graph = create_km_graph('Age')
+        st.plotly_chart(age_graph)
+
+    with col5:
+        race_graph = create_km_graph('Race')
+        st.plotly_chart(race_graph)
+
+    with col6:
+        marital_graph = create_km_graph('Marital Status')
+        st.plotly_chart(marital_graph)
+
     ridge = create_ridge(age_dict, race_dict, marital_dict)
     st.plotly_chart(ridge)
 
-    age_graph = create_km_graph('Age')
-    st.plotly_chart(age_graph)
 
-    race_graph = create_km_graph('Race')
-    st.plotly_chart(race_graph)
-
-    marital_graph = create_km_graph('Marital Status')
-    st.plotly_chart(marital_graph)
 
 
 st.markdown("""
