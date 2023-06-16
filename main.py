@@ -219,20 +219,24 @@ def figure3():
 
     fig = go.Figure()
 
-    grouped = df.groupby(['Age', 'Race', 'Marital Status']).size().reset_index(name='count')
-    filtered_groups = grouped[grouped['count'] >= 2]
-    num_of_colors = len(filtered_groups)
+    survived = df[df['Status'] == 'Alive']
+    grouped = survived[
+        survived['Age'].isin(age_dict.values()) &
+        survived['Race'].isin(race_dict.values()) &
+        survived['Marital Status'].isin(marital_dict.values())
+        ]
+    grouped = grouped.groupby(['Age', 'Race', 'Marital Status']).agg(
+        {'Survival Months': ['mean', 'count']}).reset_index()
+    grouped.columns = ['Age', 'Race', 'Marital Status', 'mean_survival_months', 'count']
+    grouped = grouped[grouped['count'] >= 2]
+    grouped = grouped.sort_values('mean_survival_months', ascending=False)
+
+    num_of_colors = len(grouped)
     colors = create_virdis(num_of_colors)
     i = 0
 
-    survived = df[df['Status'] == 'Alive']
-    grouped = survived.groupby(['Age', 'Race', 'Marital Status'])['Survival Months'].mean().reset_index()
-
-    # Sort the groups by the mean survival months in descending order
-    sorted_groups = grouped.sort_values('Survival Months', ascending=False)
-
     # Iterate through each group
-    for _, row in sorted_groups.iterrows():
+    for _, row in grouped.iterrows():
         age = row['Age']
         race = row['Race']
         marital_status = row['Marital Status']
@@ -246,7 +250,7 @@ def figure3():
 
     fig.update_layout(legend=dict(traceorder='reversed', itemsizing='constant'))
     fig.update_traces(orientation='h', side='positive', width=5, points=False)
-    fig.update_layout(xaxis_showgrid=False, xaxis_zeroline=False, xaxis_title='Survival Months')
+    fig.update_layout(xaxis_showgrid=False, xaxis_zeroline=False, xaxis_title='Time to Recover (Months)')
     fig.update_layout(violinmode='group', width=800, height=1000, xaxis_range=[0, 145])
     fig.update_layout(yaxis=dict(showticklabels=False))  # Remove y-axis tick labels
     st.plotly_chart(fig)
