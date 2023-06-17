@@ -8,6 +8,7 @@ from PIL import Image
 from matplotlib import cm
 import numpy as np
 from lifelines import KaplanMeierFitter
+from plotly.subplots import make_subplots
 
 image = Image.open('dataset-cover.jpg')
 df = pd.read_csv('Breast_Cancer.csv')
@@ -156,12 +157,8 @@ def build_two_y_axis_chart():
     )
     st.plotly_chart(fig)
 
-def create_ridge(age_dict, race_dict, marital_dict):
-    # Create the main figure
-    fig = go.Figure()
+def create_ridge(age_dict, race_dict, marital_dict, fig, row, col):
 
-    # Add your existing code for the main graph here...
-    fig = go.Figure()
     survived = df[df['Status'] == 'Alive']
 
     age_list = [key for key, val in age_dict.items() if val]
@@ -209,20 +206,18 @@ def create_ridge(age_dict, race_dict, marital_dict):
             values = survived_copy['Survival Months']
             name = name[:len(name) - 1]
             fig.add_trace(go.Violin(x=values, line_color=colors[i], name=name,
-                                    meanline_visible=True))
+                                    meanline_visible=True), row=row, col=col)
             i += 1
 
     fig.update_layout(legend=dict(traceorder='reversed', itemsizing='constant'))
     fig.update_traces(orientation='h', side='positive', width=5, points=False)
     fig.update_layout(xaxis_showgrid=False, xaxis_zeroline=False, xaxis_title='Time to Recover (Months)')
-    fig.update_layout(violinmode='group', width=800, height=800, xaxis_range=[0, 145])
+    fig.update_layout(violinmode='group', xaxis_range=[0, 145])
     fig.update_layout(yaxis=dict(showticklabels=False))  # Remove y-axis tick labels
-    return fig
 
 
-def create_km_graph(name, name_dict):
-    fig = go.Figure()
 
+def create_km_graph(name, name_dict, fig, row, col):
     survived = df.copy()
     survived['Status'] = survived['Status'].map({'Alive': 1, 'Dead': 0})
 
@@ -255,7 +250,7 @@ def create_km_graph(name, name_dict):
                 mode='lines',  # Update the mode to 'lines'
                 line=dict(shape='hv', width=3, color=color_palette[i]),
                 name=value
-            ))
+            ), row=row, col=col)
 
     fig.update_layout(
         title=f'Kaplan-Meier Recovery Curve By {name}',
@@ -267,9 +262,8 @@ def create_km_graph(name, name_dict):
             traceorder="reversed"
         )
     )
-    fig.update_layout(width=700, height=400, xaxis_range=[0, 60], yaxis_range=[0, 0.25])
+    fig.update_layout(xaxis_range=[0, 60], yaxis_range=[0, 0.25])
 
-    return fig
 
 
 def figure3():
@@ -293,17 +287,24 @@ def figure3():
             "Marital Status", ['Married', 'Divorced', 'Single ', 'Widowed', 'Separated']
         )
 
-    ridge = create_ridge(age_dict, race_dict, marital_dict)
-    st.plotly_chart(ridge)
+    fig = make_subplots(
+        rows=3, cols=2,
+        specs=[[{}, {"rowspan": 3}],
+               [{}, None],
+               [{}, None]],
+        print_grid=True
+    )
 
-    age_graph = create_km_graph('Age', age_dict)
-    st.plotly_chart(age_graph)
+    create_ridge(age_dict, race_dict, marital_dict, fig, 1, 2)
 
-    race_graph = create_km_graph('Race', race_dict)
-    st.plotly_chart(race_graph)
+    create_km_graph('Age', age_dict, fig, 1, 1)
 
-    marital_graph = create_km_graph('Marital Status', marital_dict)
-    st.plotly_chart(marital_graph)
+    create_km_graph('Race', race_dict, fig, 2, 1)
+
+    create_km_graph('Marital Status', marital_dict, fig, 3, 1)
+
+    fig.update_layout(height=900, width=800)
+    st.plotly_chart(fig)
 
 
 st.markdown("""
