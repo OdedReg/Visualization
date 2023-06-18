@@ -310,7 +310,7 @@ def figure3():
     fig.update_xaxes(range=[0, 60], row=1, col=1)
     fig.update_xaxes(range=[0, 60], row=2, col=1)
     fig.update_xaxes(range=[0, 60], row=3, col=1)
-    fig.update_xaxes(range=[0, 145], dtick=20, row=1, col=2)
+    fig.update_xaxes(range=[0, 200], dtick=20, tickvals=list(range(0, 141, 20)), row=1, col=2)
 
     # Update y_range
     fig.update_yaxes(range=[0, 0.25], row=1, col=1)
@@ -321,7 +321,7 @@ def figure3():
     # Violin positive
     fig.update_traces(orientation='h', side='positive', width=5, points=False, row=1, col=2)
 
-    fig.update_layout(height=900, width=800,
+    fig.update_layout(height=900, width=900,
                       xaxis1_title='Time (Months)',
                       xaxis2_title='Time to Recover (Months)',
                       xaxis3_title='Time (Months)',
