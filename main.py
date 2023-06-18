@@ -154,13 +154,8 @@ def build_two_y_axis_chart():
 
     fig.update_layout(height=500, width=900,
         xaxis=dict(title='<b>Race<b>', title_font=dict(size=22), tickfont=dict(size=16)),
-                      yaxis=dict(
-                          title='<b>Malignancy Rate (%)</b>',
-                          title_font=dict(size=22),
-                          tickfont=dict(size=16),
-                          range=[0, 3],  # Set the y-axis range from 0 to 3
-                          dtick=0.5  # Set the tick increment to 0.5
-                      ),        yaxis2=dict(title='<b>Average Tumor Size (mm)<b>', overlaying='y', side='right', title_font=dict(size=22), tickfont=dict(size=16)),
+        yaxis=dict(title='<b>Malignancy Rate (%)</b>', title_font=dict(size=22), tickfont=dict(size=16)),
+        yaxis2=dict(title='<b>Average Tumor Size (mm)<b>', overlaying='y', side='right', title_font=dict(size=22), tickfont=dict(size=16)),
         barmode='group',
         legend_x=1.2,
         legend_font=dict(size=16),  # Increase the legends' font size
@@ -334,7 +329,7 @@ def figure3():
     # Violin positive
     fig.update_traces(orientation='h', side='positive', width=5, points=False, row=1, col=2)
 
-    fig.update_layout(height=900, width=800,
+    fig.update_layout(height=900, width=900,
                       xaxis1=dict(title='<b>Time (Months)<b>', title_font=dict(size=20)),
                       xaxis2=dict(title='<b>Time to Recover (Months)<b>', title_font=dict(size=20)),
                       xaxis3=dict(title='<b>Time (Months)<b>', title_font=dict(size=20)),
