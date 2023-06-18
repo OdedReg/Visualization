@@ -78,7 +78,7 @@ def create_virdis(num):
 
 
 def build_heatmap():
-    st.subheader('Impact of demographic characteristics on the mortality of women with breast cancer in America')
+    st.markdown("<h3 style='text-align: center;'>What are the relationship between age, race, and marital status on the mortality of women with breast cancer in America?</h3>", unsafe_allow_html=True)
 
     col1 = st.columns(1)
 
@@ -95,8 +95,11 @@ def build_heatmap():
           marker=dict(color='salmon')
       ))
     bar_fig.update_layout(
-        yaxis=dict(title=dict(text= "Mortality Rate (%)", font=dict(size=20))),
-        xaxis=dict(title=dict(text=f'{feature1}', font=dict(size=20))))
+        yaxis=dict(title=dict(text="<b>Mortality Rate (%)</b>", font=dict(size=22))),
+        xaxis=dict(title=dict(text=f"<b>{feature1}</b>", font=dict(size=20)), tickfont=dict(size=22)),
+        yaxis_tickfont=dict(size=18),
+        xaxis_tickfont=dict(size=18),
+        bargap= 0.5)
     st.plotly_chart(bar_fig)
 
 
@@ -116,16 +119,16 @@ def build_heatmap():
     fig.update_xaxes(side="top")
     fig.update_layout(height=600, width=800)
     fig.update_layout(
-    yaxis=dict(title=dict(text=f"{feature1}", font=dict(size=24))),
-    xaxis=dict(title=dict(text=f"{feature2}", font=dict(size=24))),
-    coloraxis_colorbar=dict(title=dict(text='Mortality rate (%)', font=dict(size=22)))
+    yaxis=dict(title=dict(text=f"<span style='font-weight:bold'>{feature1}</span>", font=dict(size=22))),
+    xaxis=dict(title=dict(text=f"<b>{feature2}</b>", font=dict(size=22))),
+    coloraxis_colorbar=dict(title=dict(text='<b>Mortality<br>Rate (%)<b>', font=dict(size=22)))
 )
     # Display the heatmap in Streamlit
     st.plotly_chart(fig)
 
 
 def build_two_y_axis_chart():
-    st.subheader('Malignancy Rate and Average Tumor Size by Race')
+    st.markdown("<h3 style='text-align: center;'>Are there racial disparities in breast cancer diagnosiss?</h3>", unsafe_allow_html=True)
     fig = go.Figure()
 
     fig.add_trace(go.Bar(
@@ -149,9 +152,9 @@ def build_two_y_axis_chart():
     ))
 
     fig.update_layout(
-        xaxis=dict(title='Race', title_font=dict(size=20)),
-        yaxis=dict(title='Malignancy Rate (%)', title_font=dict(size=16)),
-        yaxis2=dict(title='Average Tumor Size (mm)', overlaying='y', side='right', title_font=dict(size=16)),
+        xaxis=dict(title='<b>Race<b>', title_font=dict(size=22)),
+        yaxis=dict(title='<b>Malignancy Rate (%)</b>', title_font=dict(size=20)),
+        yaxis2=dict(title='<b>Average Tumor Size\n(mm)<b>', overlaying='y', side='right', title_font=dict(size=20)),
         barmode='group',
         bargap=0.5  # Adjust the spacing between the bars
     )
@@ -270,7 +273,7 @@ def create_km_graph(name, name_dict, fig, row, col):
 
 
 def figure3():
-    st.subheader('Women with which characteristics are more likely to have a short recovery from breast cancer?')
+    st.markdown("<h2 style='text-align: center;'>Women with which characteristics are more likely to have a short recovery from breast cancer?</h2>", unsafe_allow_html=True)
     st.markdown('### Select Characteristics')
     col1, col2, col3 = st.columns(3)
 
@@ -322,17 +325,16 @@ def figure3():
     fig.update_traces(orientation='h', side='positive', width=5, points=False, row=1, col=2)
 
     fig.update_layout(height=900, width=900,
-                      xaxis1_title='Time (Months)',
-                      xaxis2_title='Time to Recover (Months)',
-                      xaxis3_title='Time (Months)',
-                      xaxis4_title='Time (Months)',
-                      yaxis1_title='Recovery Probability',
+                      xaxis1=dict(title='<b>Time (Months)<b>', title_font=dict(size=20)),
+                      xaxis2=dict(title='<b>Time to Recover (Months)<b>', title_font=dict(size=20)),
+                      xaxis3=dict(title='<b>Time (Months)<b>', title_font=dict(size=20)),
+                      xaxis4=dict(title='<b>Time (Months)<b>', title_font=dict(size=20)),
+                      yaxis1=dict(title='<b>Recovery Probability<b>', title_font=dict(size=20)),
                       yaxis2_title='',
-                      yaxis3_title='Recovery Probability',
-                      yaxis4_title='Recovery Probability',
+                      yaxis3=dict(title='<b>Recovery Probability<b>', title_font=dict(size=20)),
+                      yaxis4=dict(title='<b>Recovery Probability<b>', title_font=dict(size=20)),
                       legend_tracegroupgap=200,
-                      legend_x=-0.25
-                      )
+                      legend_x=-0.25)
 
     st.plotly_chart(fig)
 
