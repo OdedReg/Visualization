@@ -349,7 +349,7 @@ def figure3():
         </style>
         <div class="center-align">
             <div class="chart-container">
-                {st.plotly_chart(fig, use_container_width=True)}
+                {st.plotly_chart(fig)}
             </div>
         </div>
     '''
