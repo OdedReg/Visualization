@@ -241,6 +241,8 @@ def create_ridge(age_dict, race_dict, marital_dict, fig, row_fig, col):
             fig.add_annotation(annotation, row=row_fig, col=col)
 
             i += 1
+    else:
+        fig.add_trace(go.Violin())
 
 
 
@@ -249,6 +251,14 @@ def create_km_graph(name, name_dict, fig, row, col):
     survived['Status'] = survived['Status'].map({'Alive': 1, 'Dead': 0})
 
     name_list = [key for key, val in name_dict.items() if val]
+
+    if name == 'Age':
+        legendgroup = '2'
+    elif name == 'Race':
+        legendgroup = '3'
+    else:
+        legendgroup = '4'
+
     if name_list:
         survived = survived[survived[name].isin(name_list)]
 
@@ -256,13 +266,6 @@ def create_km_graph(name, name_dict, fig, row, col):
 
         # Define a color palette with different colors
         color_palette = create_virdis(n_colors)
-
-        if name == 'Age':
-          legendgroup = '2'
-        elif name == 'Race':
-          legendgroup = '3'
-        else:
-            legendgroup = '4'
 
         for i, value in enumerate(survived[name].unique()):
             kmf = KaplanMeierFitter()
@@ -288,6 +291,17 @@ def create_km_graph(name, name_dict, fig, row, col):
                 legendgrouptitle=dict(text=f'{name}', font=dict(size=18))
             ), row=row, col=col)
 
+    else:
+        # Add a dummy trace with invisible lines and markers to represent the legend title
+        fig.add_trace(go.Scatter(
+            x=[0],
+            y=[0],
+            marker=dict(color='rgba(0, 0, 0, 0)', opacity=0),
+            name="",
+            legendgroup=legendgroup,
+            showlegend=True,
+            legendgrouptitle=dict(text=f'{name}', font=dict(size=18))
+        ), row=row, col=col)
 
 def figure3():
     st.markdown("<h3 style='text-align: left;'>Women with which characteristics are more likely to have a short recovery from breast cancer?</h3>", unsafe_allow_html=True)
