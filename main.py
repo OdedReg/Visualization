@@ -278,7 +278,7 @@ def create_km_graph(name, name_dict, fig, row, col):
                 line=dict(shape='hv', width=3, color=color_palette[i]),
                 name=value,
                 legendgroup=legendgroup,
-                legendgrouptitle=dict(text=f'{name}', font=dict(size=18, weight='bold'))
+                legendgrouptitle=dict(text=f'{name}', font=dict(size=18))
             ), row=row, col=col)
 
 
@@ -287,8 +287,9 @@ def figure3():
     st.markdown('### Select Characteristics')
 
     col1, col2, col3 = st.columns(3)
+    st.markdown("<h4 style='text-align: left;'>Dashed line represents the average recovery time</h4>")
     st.subheader("Kaplan-Meier Recovery Estimates and Recovery Time Distribution charts")
-
+    
     with col1:
         age_dict = build_st_query_for_ridge_charts(
             "Age", ['60-69', '50-59', '40-49', '30-39']
