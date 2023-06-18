@@ -86,6 +86,9 @@ def build_heatmap():
         options_feature1 = ['Age', 'Race', 'Marital Status']
         feature1 = build_st_query_for_line_charts("main feature", options_feature1)
 
+    st.markdown(f"<h4 style='text-align: left;'>Mortality Rate by {feature1}</h4>", unsafe_allow_html=True)
+
+
     mortality_df = get_mortality_rate(feature1).sort_values(by='Mortality Rate')
     bar_fig = go.Figure()
 
@@ -109,6 +112,7 @@ def build_heatmap():
         options_feature2.remove(feature1)
         feature2 = build_st_query_for_line_charts("secondary feature", options_feature2)
 
+    st.markdown(f"<h4 style='text-align: left;'>Mortality Rate by {feature1} and {feature2}</h4>", unsafe_allow_html=True)
 
     # Calculate the mortality rates based on the "Dead" values
     pivot_df = df.pivot_table(index=feature1, columns=feature2, values='Status',
@@ -130,7 +134,7 @@ def build_heatmap():
 
 def build_two_y_axis_chart():
     st.markdown("<h3 style='text-align: center;'>Are there racial disparities in breast cancer diagnosiss?</h3>", unsafe_allow_html=True)
-    st.markdown("<h4 style='text-align: center;'>Malignancy Rate and Average Tumor Size by Race</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: left;'>Malignancy Rate and Average Tumor Size by Race</h4>", unsafe_allow_html=True)
 
 
     fig = go.Figure()
@@ -286,12 +290,11 @@ def create_km_graph(name, name_dict, fig, row, col):
 
 
 def figure3():
-    st.markdown("<h2 style='text-align: center;'>Women with which characteristics are more likely to have a short recovery from breast cancer?</h2>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center;'>Women with which characteristics are more likely to have a short recovery from breast cancer?</h3>", unsafe_allow_html=True)
     st.markdown('### Select Characteristics')
 
     col1, col2, col3 = st.columns(3)
-    st.markdown("### Kaplan-Meier Recovery Estimates and Recovery Time Distribution charts")
-
+    st.markdown("<h4 style='text-align: left;'>Kaplan-Meier Recovery Estimates and Recovery Time Distribution charts</h4>", unsafe_allow_html=True)
 
     with col1:
         age_dict = build_st_query_for_ridge_charts(
