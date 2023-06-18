@@ -338,7 +338,8 @@ def figure3():
                       yaxis2_title='',
                       yaxis3=dict(title='<b>Recovery Probability<b>', title_font=dict(size=18)),
                       yaxis4=dict(title='<b>Recovery Probability<b>', title_font=dict(size=18)),
-                      legend_tracegroupgap=200,
+                      legend_tracegroupgap=180,
+                      legend_title=dict(size=16),  # Increase the legends' font size
                       legend_font=dict(size=16),  # Increase the legends' font size
                       legend_x=-0.3)
 
