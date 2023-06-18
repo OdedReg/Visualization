@@ -326,7 +326,7 @@ def create_ridge(age_dict, race_dict, marital_dict):
     fig.update_layout(legend=dict(traceorder='reversed', itemsizing='constant'))
     fig.update_traces(orientation='h', side='positive', width=5, points=False)
     fig.update_layout(xaxis_showgrid=False, xaxis_zeroline=False, xaxis_title='Time to Recover (Months)')
-    fig.update_layout(violinmode='group', width=200, height=900, xaxis_range=[0, 145])
+    fig.update_layout(xaxis_range=[0, 145])
     fig.update_layout(yaxis=dict(showticklabels=False))  # Remove y-axis tick labels
     return fig
 
@@ -396,7 +396,7 @@ def create_km_charts(age_dict, race_dict, marital_dict):
     fig.update_yaxes(range=[0, 0.25], row=2, col=1)
     fig.update_yaxes(range=[0, 0.25], row=3, col=1)
 
-    fig.update_layout(height=900, width=200,
+    fig.update_layout(
                       xaxis1_title='Time (Months)',
                       xaxis2_title='Time (Months)',
                       xaxis3_title='Time (Months)',
@@ -474,13 +474,13 @@ def figure3():
         col4, col5 = st.columns(2)
 
         with col4:
-            fig1 = create_km_charts(age_dict, race_dict, marital_dict)
+            # fig1 = create_km_charts(age_dict, race_dict, marital_dict)
             st.subheader("Kaplam-Meier Recovery Chart")
             st.plotly_chart(fig1)
 
 
         with col2:
-            st.subheader("Distribution of Time")
+            # st.subheader("Distribution of Time")
             fig2 = create_ridge(age_dict, race_dict, marital_dict)
             st.plotly_chart(fig2)
 
