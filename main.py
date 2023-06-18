@@ -297,6 +297,7 @@ def figure3():
                [{}, None],
                [{}, None]],
         column_widths=[0.35, 0.65],
+        column_spacing=0.02,
         print_grid=True
     )
 
