@@ -120,9 +120,9 @@ def build_heatmap():
     fig.update_layout(height=600, width=800)
     fig.update_traces(textfont=dict(size=16))
     fig.update_layout(
-    yaxis=dict(title=dict(text=f"<span style='font-weight:bold'>{feature1}</span>", font=dict(size=22)), tickfont=dict(size=14)),
-    xaxis=dict(title=dict(text=f"<b>{feature2}</b>", font=dict(size=22)), tickfont=dict(size=14)),
-    coloraxis_colorbar=dict(title=dict(text='<b>Mortality<br>Rate (%)<b>', font=dict(size=22)), tickfont=dict(size=14))
+    yaxis=dict(title=dict(text=f"<span style='font-weight:bold'>{feature1}</span>", font=dict(size=22)), tickfont=dict(size=16)),
+    xaxis=dict(title=dict(text=f"<b>{feature2}</b>", font=dict(size=22)), tickfont=dict(size=16)),
+    coloraxis_colorbar=dict(title=dict(text='<b>Mortality<br>Rate (%)<b>', font=dict(size=22)), tickfont=dict(size=16))
 )
     # Display the heatmap in Streamlit
     st.plotly_chart(fig)
