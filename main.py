@@ -287,9 +287,10 @@ def figure3():
     st.markdown('### Select Characteristics')
 
     col1, col2, col3 = st.columns(3)
-    st.markdown("<h4 style='text-align: left;'>Dashed line represents the average recovery time</h4>")
     st.subheader("Kaplan-Meier Recovery Estimates and Recovery Time Distribution charts")
-    
+    st.markdown("<h4 style='text-align: left;'>Dashed line represents the average recovery time</h4>",
+                unsafe_allow_html=True)
+
     with col1:
         age_dict = build_st_query_for_ridge_charts(
             "Age", ['60-69', '50-59', '40-49', '30-39']
