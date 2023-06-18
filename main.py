@@ -130,7 +130,7 @@ def build_heatmap():
 
 def build_two_y_axis_chart():
     st.markdown("<h3 style='text-align: center;'>Are there racial disparities in breast cancer diagnosiss?</h3>", unsafe_allow_html=True)
-    st.markdown("<h4 style='text-align: center;'>Malignancy Rate and Average Tumor Size by Race</h2>"</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center;'>Malignancy Rate and Average Tumor Size by Race</h4>", unsafe_allow_html=True)
 
 
     fig = go.Figure()
