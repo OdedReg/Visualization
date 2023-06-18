@@ -334,28 +334,7 @@ def figure3():
                       legend_x=-0.2
                       )
 
-    html_code = f'''
-        <style>
-            .center-align {{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-            }}
-            .chart-container {{
-                width: 90%;
-                max-width: 1200px;
-            }}
-        </style>
-        <div class="center-align">
-            <div class="chart-container">
-                {st.plotly_chart(fig)}
-            </div>
-        </div>
-    '''
-
-    # Display the HTML code
-    st.write(html_code)
+    st.plotly_chart(fig,use_container_width = True)
 
 
 st.markdown("""
