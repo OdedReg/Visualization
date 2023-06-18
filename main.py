@@ -296,6 +296,7 @@ def figure3():
         specs=[[{}, {"rowspan": 3}],
                [{}, None],
                [{}, None]],
+        column_widths=[0.35, 0.65],
         print_grid=True
     )
 
