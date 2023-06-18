@@ -78,7 +78,7 @@ def create_virdis(num):
 
 
 def build_heatmap():
-    st.markdown("<h3 style='text-align: center;'>What are the relationship between age, race, and marital status on the mortality of women with breast cancer in America?</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center;'>What are the relationships between age, race, and marital status on the mortality of women with breast cancer in America?</h3>", unsafe_allow_html=True)
 
     col1 = st.columns(1)
 
@@ -95,8 +95,8 @@ def build_heatmap():
           marker=dict(color='salmon')
       ))
     bar_fig.update_layout(
-        yaxis=dict(title=dict(text="<b>Mortality Rate (%)</b>", font=dict(size=22))),
-        xaxis=dict(title=dict(text=f"<b>{feature1}</b>", font=dict(size=20)), tickfont=dict(size=22)),
+        yaxis=dict(title=dict(text="<b>Mortality Rate (%)</b>", font=dict(size=20))),
+        xaxis=dict(title=dict(text=f"<b>{feature1}</b>", font=dict(size=20)), tickfont=dict(size=18)),
         yaxis_tickfont=dict(size=18),
         xaxis_tickfont=dict(size=18),
         bargap= 0.5)
@@ -115,7 +115,7 @@ def build_heatmap():
                               aggfunc=lambda x: round(sum(x == 'Dead') / len(x), 2))
 
     # Create a heatmap using Plotly Express
-    fig = px.imshow(pivot_df, text_auto=True, color_continuous_scale='reds', labels=dict(color="Mortality rate (%)"))
+    fig = px.imshow(pivot_df, text_auto=True, color_continuous_scale='reds', labels=dict(color="Mortality rate (%)", font=dict(size=18)))
     fig.update_xaxes(side="top")
     fig.update_layout(height=600, width=800)
     fig.update_layout(
