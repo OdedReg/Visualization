@@ -288,7 +288,7 @@ def figure3():
 
     col1, col2, col3 = st.columns(3)
     st.subheader("Kaplan-Meier Recovery Estimates and Recovery Time Distribution charts")
-    st.markdown("<h4 style='text-align: left;'>Dashed line represents the average recovery time</h4>",
+    st.markdown("<h6 style='text-align: right;'>Dashed line represents the average recovery time</h4>",
                 unsafe_allow_html=True)
 
     with col1:
