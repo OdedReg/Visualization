@@ -118,6 +118,7 @@ def build_heatmap():
     fig = px.imshow(pivot_df, text_auto=True, color_continuous_scale='reds', labels=dict(color="Mortality rate (%)", font=dict(size=18)))
     fig.update_xaxes(side="top")
     fig.update_layout(height=600, width=800)
+    fig.update_traces(textfont=dict(size=16))
     fig.update_layout(
     yaxis=dict(title=dict(text=f"<span style='font-weight:bold'>{feature1}</span>", font=dict(size=22))),
     xaxis=dict(title=dict(text=f"<b>{feature2}</b>", font=dict(size=22))),
@@ -153,9 +154,10 @@ def build_two_y_axis_chart():
 
     fig.update_layout(
         xaxis=dict(title='<b>Race<b>', title_font=dict(size=22)),
-        yaxis=dict(title='<b>Malignancy Rate (%)</b>', title_font=dict(size=20)),
-        yaxis2=dict(title='<b>Average Tumor Size\n(mm)<b>', overlaying='y', side='right', title_font=dict(size=20)),
+        yaxis=dict(title='<b>Malignancy Rate (%)</b>', title_font=dict(size=22)),
+        yaxis2=dict(title='<b>Average Tumor Size (mm)<b>', overlaying='y', side='right', title_font=dict(size=22)),
         barmode='group',
+        legend_x=-1.2,
         bargap=0.5  # Adjust the spacing between the bars
     )
     st.plotly_chart(fig)
@@ -324,7 +326,7 @@ def figure3():
     # Violin positive
     fig.update_traces(orientation='h', side='positive', width=5, points=False, row=1, col=2)
 
-    fig.update_layout(height=900, width=900,
+    fig.update_layout(height=900, width=800,
                       xaxis1=dict(title='<b>Time (Months)<b>', title_font=dict(size=20)),
                       xaxis2=dict(title='<b>Time to Recover (Months)<b>', title_font=dict(size=20)),
                       xaxis3=dict(title='<b>Time (Months)<b>', title_font=dict(size=20)),
