@@ -273,7 +273,7 @@ def create_km_graph(name, name_dict, fig, row, col):
                 line=dict(shape='hv', width=3, color=color_palette[i]),
                 name=value,
                 legendgroup=legendgroup,
-                legendgrouptitle= dict(text=f'{name}')
+                legendgrouptitle= dict(text=f'{name}', font=dict(size=16))
             ), row=row, col=col)
 
 
@@ -340,7 +340,6 @@ def figure3():
                       yaxis4=dict(title='<b>Recovery Probability<b>', title_font=dict(size=18)),
                       legend_tracegroupgap=180,
                       legend_font=dict(size=14),  # Increase the legends' font size
-                    coloraxis_colorbar=dict(font=dict(size=16)),
                       legend_x=-0.3)
 
     st.plotly_chart(fig)
