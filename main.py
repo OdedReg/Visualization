@@ -475,13 +475,13 @@ def figure3():
     with col4:
         fig1 = create_km_charts(age_dict, race_dict, marital_dict)
         st.subheader("Kaplam-Meier Recovery Chart")
-        st.plotly_chart(fig1)
+        st.write(fig1)
 
 
     with col2:
         st.subheader("Distribution of Time")
         fig2 = create_ridge(age_dict, race_dict, marital_dict)
-        st.plotly_chart(fig2)
+        st.write(fig2)
 
     # st.plotly_chart(fig)
 
