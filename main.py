@@ -470,18 +470,19 @@ def figure3():
     #                   yaxis4_title='Recovery Probability',
     #                   legend_tracegroupgap=50
     #                   )
-    col4, col5 = st.beta_columns(2)
+    with st.container():
+        col4, col5 = st.columns(2)
 
-    with col4:
-        fig1 = create_km_charts(age_dict, race_dict, marital_dict)
-        st.subheader("Kaplam-Meier Recovery Chart")
-        st.plotly_chart(fig1)
+        with col4:
+            fig1 = create_km_charts(age_dict, race_dict, marital_dict)
+            st.subheader("Kaplam-Meier Recovery Chart")
+            st.plotly_chart(fig1)
 
 
-    with col2:
-        st.subheader("Distribution of Time")
-        fig2 = create_ridge(age_dict, race_dict, marital_dict)
-        st.plotly_chart(fig2)
+        with col2:
+            st.subheader("Distribution of Time")
+            fig2 = create_ridge(age_dict, race_dict, marital_dict)
+            st.plotly_chart(fig2)
 
     # st.plotly_chart(fig)
 
