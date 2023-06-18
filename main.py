@@ -242,7 +242,7 @@ def create_ridge(age_dict, race_dict, marital_dict, fig, row_fig, col):
 
             i += 1
     else:
-        fig.add_trace(go.Violin())
+        fig.add_trace(go.Violin(visible='legendonly', showlegend=False))
 
 
 
