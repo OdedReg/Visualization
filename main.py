@@ -285,9 +285,9 @@ def create_km_graph(name, name_dict, fig, row, col):
 def figure3():
     st.markdown("<h2 style='text-align: center;'>Women with which characteristics are more likely to have a short recovery from breast cancer?</h2>", unsafe_allow_html=True)
     st.markdown('### Select Characteristics')
-    st.subheader("Kaplan-Meier recovery probability and Recovery time distribution charts")
-    col1, col2, col3 = st.columns(3)
 
+    col1, col2, col3 = st.columns(3)
+    st.subheader("Kaplan-Meier recovery probability and Recovery time distribution charts")
 
     with col1:
         age_dict = build_st_query_for_ridge_charts(
