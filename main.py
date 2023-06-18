@@ -331,7 +331,7 @@ def figure3():
                       yaxis3_title='Recovery Probability',
                       yaxis4_title='Recovery Probability',
                       legend_tracegroupgap=200,
-                      legend_x=-0.2
+                      legend_x=-0.25
                       )
 
     st.plotly_chart(fig)
