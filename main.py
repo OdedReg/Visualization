@@ -313,7 +313,7 @@ def figure3():
 
     fig = make_subplots(
         rows=3, cols=2,
-        subplot_titles=("", "--Dashed line represents the average recovery time", "", ""),
+        subplot_titles=("", "--Dashed line represents the average recovery time\nOnly groups with more than 1 patients were added", "", ""),
         specs=[[{}, {"rowspan": 3}],
                [{}, None],
                [{}, None]],
