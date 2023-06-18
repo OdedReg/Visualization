@@ -34,7 +34,7 @@ def get_mortality_rate(feature_name):
     return mortality_df
 
 def build_st_query_for_line_charts(title: str, options: list):
-    feature = st.radio(f"**Select {title}**", options)
+    feature = st.radio(f"## **Select {title}**", options)
     return feature
 
 def build_st_query_for_ridge_charts(title: str, options: list):
