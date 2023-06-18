@@ -342,9 +342,15 @@ def figure3():
                 align-items: center;
                 height: 100vh;
             }}
+            .chart-container {{
+                width: 90%;
+                max-width: 1200px;
+            }}
         </style>
         <div class="center-align">
-            {st.plotly_chart(fig, use_container_width=True)}
+            <div class="chart-container">
+                {st.plotly_chart(fig, use_container_width=True)}
+            </div>
         </div>
     '''
 
