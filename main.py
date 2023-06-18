@@ -313,7 +313,7 @@ def figure3():
 
     fig = make_subplots(
         rows=3, cols=2,
-        subplot_titles=("By Age", "--Dashed line represents the average recovery time", "By Race", "By Marital Status"),
+        subplot_titles=("", "--Dashed line represents the average recovery time", "", ""),
         specs=[[{}, {"rowspan": 3}],
                [{}, None],
                [{}, None]],
