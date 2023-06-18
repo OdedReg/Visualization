@@ -34,7 +34,7 @@ def get_mortality_rate(feature_name):
     return mortality_df
 
 def build_st_query_for_line_charts(title: str, options: list):
-    feature = st.radio(f'Select {title}', options)
+    feature = st.radio(f'<span style="font-weight:bold;font-size:20px">Select {title}</span>', options)
     return feature
 
 def build_st_query_for_ridge_charts(title: str, options: list):
@@ -153,11 +153,11 @@ def build_two_y_axis_chart():
     ))
 
     fig.update_layout(
-        xaxis=dict(title='<b>Race<b>', title_font=dict(size=22)),
-        yaxis=dict(title='<b>Malignancy Rate (%)</b>', title_font=dict(size=22)),
+        xaxis=dict(title='<b>Race<b>', title_font=dict(size=22), tickfont=dict(size=16)),
+        yaxis=dict(title='<b>Malignancy Rate (%)</b>', title_font=dict(size=22), tickfont=dict(size=16)),
         yaxis2=dict(title='<b>Average Tumor Size (mm)<b>', overlaying='y', side='right', title_font=dict(size=22)),
         barmode='group',
-        legend_x=-1.2,
+        legend_x=1.2,
         bargap=0.5  # Adjust the spacing between the bars
     )
     st.plotly_chart(fig)
