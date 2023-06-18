@@ -78,7 +78,7 @@ def create_virdis(num):
 
 
 def build_heatmap():
-    st.markdown("<h3 style='text-align: center;'>What are the relationships between age, race, and marital status on the mortality of women with breast cancer in America?</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: left;'>What are the relationships between age, race, and marital status on the mortality of women with breast cancer in America?</h3>", unsafe_allow_html=True)
 
     col1 = st.columns(1)
 
@@ -133,7 +133,7 @@ def build_heatmap():
 
 
 def build_two_y_axis_chart():
-    st.markdown("<h3 style='text-align: center;'>Are there racial disparities in breast cancer diagnosiss?</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: left;'>Are there racial disparities in breast cancer diagnosiss?</h3>", unsafe_allow_html=True)
     st.markdown("<h4 style='text-align: left;'>Malignancy Rate and Average Tumor Size by Race</h4>", unsafe_allow_html=True)
 
 
@@ -290,8 +290,8 @@ def create_km_graph(name, name_dict, fig, row, col):
 
 
 def figure3():
-    st.markdown("<h3 style='text-align: center;'>Women with which characteristics are more likely to have a short recovery from breast cancer?</h3>", unsafe_allow_html=True)
-    st.markdown('### Select Characteristics')
+    st.markdown("<h3 style='text-align: left;'>Women with which characteristics are more likely to have a short recovery from breast cancer?</h3>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: left;'>Select Characteristics</h4>", unsafe_allow_html=True)
 
     col1, col2, col3 = st.columns(3)
     st.markdown("<h4 style='text-align: left;'>Kaplan-Meier Recovery Estimates and Recovery Time Distribution charts</h4>", unsafe_allow_html=True)
