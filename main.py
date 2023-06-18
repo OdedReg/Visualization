@@ -288,8 +288,7 @@ def figure3():
 
     col1, col2, col3 = st.columns(3)
     st.subheader("Kaplan-Meier Recovery Estimates and Recovery Time Distribution charts")
-    st.markdown("<h6 style='text-align: right;'>Dashed line represents the average recovery time</h4>",
-                unsafe_allow_html=True)
+
 
     with col1:
         age_dict = build_st_query_for_ridge_charts(
@@ -308,7 +307,7 @@ def figure3():
 
     fig = make_subplots(
         rows=3, cols=2,
-        subplot_titles=("By Age", "", "By Race", "By Marital Status"),
+        subplot_titles=("By Age", "--Dashed line represents the average recovery time", "By Race", "By Marital Status"),
         specs=[[{}, {"rowspan": 3}],
                [{}, None],
                [{}, None]],
