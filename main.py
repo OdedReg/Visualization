@@ -474,8 +474,8 @@ def figure3():
         col4, col5 = st.columns(2)
 
         with col4:
-            # fig1 = create_km_charts(age_dict, race_dict, marital_dict)
-            st.subheader("Kaplam-Meier Recovery Chart")
+            # st.subheader("Kaplam-Meier Recovery Chart")
+            fig1 = create_km_charts(age_dict, race_dict, marital_dict)
             st.plotly_chart(fig1)
 
 
