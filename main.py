@@ -161,7 +161,7 @@ def build_two_y_axis_chart():
                           range=[0, 3],  # Set the y-axis range from 0 to 3
                           dtick=0.5  # Set the tick increment to 0.5
                       ),
-        yaxis2=dict(title='<b>Average Tumor Size (mm)<b>', overlaying='y', side='right', title_font=dict(size=22), tickfont=dict(size=16)),
+        yaxis2=dict(title='<b>Average Tumor Size (mm)<b>', overlaying='y', side='right', title_font=dict(size=22), tickfont=dict(size=16), range=[0, 30],dtick=5),
         barmode='group',
         legend_x=1.2,
         legend_font=dict(size=16),  # Increase the legends' font size
