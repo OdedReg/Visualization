@@ -287,7 +287,7 @@ def figure3():
     st.markdown('### Select Characteristics')
 
     col1, col2, col3 = st.columns(3)
-    st.subheader("Kaplan-Meier recovery probability and Recovery time distribution charts")
+    st.subheader("#### Kaplan-Meier Recovery Estimates and Recovery Time Distribution charts")
 
     with col1:
         age_dict = build_st_query_for_ridge_charts(
