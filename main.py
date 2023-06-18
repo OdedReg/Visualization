@@ -330,7 +330,6 @@ def figure3():
     fig.update_traces(orientation='h', side='positive', width=5, points=False, row=1, col=2)
 
     fig.update_layout(height=900, width=800,
-                      font=dict(size=24),
                       xaxis1=dict(title='<b>Time (Months)<b>', title_font=dict(size=20)),
                       xaxis2=dict(title='<b>Time to Recover (Months)<b>', title_font=dict(size=20)),
                       xaxis3=dict(title='<b>Time (Months)<b>', title_font=dict(size=20)),
