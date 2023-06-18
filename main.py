@@ -273,7 +273,7 @@ def create_km_graph(name, name_dict, fig, row, col):
                 line=dict(shape='hv', width=3, color=color_palette[i]),
                 name=value,
                 legendgroup=legendgroup,
-                legendgrouptitle= dict(text=f'{name}')
+                legendgrouptitle= dict(text=f'{name}', font=dict(size=16))
             ), row=row, col=col)
 
 
