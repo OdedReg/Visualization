@@ -161,7 +161,6 @@ def build_two_y_axis_chart():
         legend_font=dict(size=16),  # Increase the legends' font size
         bargap=0.5  # Adjust the spacing between the bars
     )
-    fig.update_xaxes(range=[0, 60])
 
     st.plotly_chart(fig)
 
