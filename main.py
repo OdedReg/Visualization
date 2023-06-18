@@ -321,7 +321,7 @@ def figure3():
     # Violin positive
     fig.update_traces(orientation='h', side='positive', width=5, points=False, row=1, col=2)
 
-    fig.update_layout(height=900, width=1000,
+    fig.update_layout(height=900, width=800,
                       xaxis1_title='Time (Months)',
                       xaxis2_title='Time to Recover (Months)',
                       xaxis3_title='Time (Months)',
