@@ -318,7 +318,7 @@ def figure3():
     fig.update_xaxes(range=[0, 60], row=1, col=1)
     fig.update_xaxes(range=[0, 60], row=2, col=1)
     fig.update_xaxes(range=[0, 60], row=3, col=1)
-    fig.update_xaxes(range=[0, 210], dtick=20, tickvals=list(range(0, 141, 20)), row=1, col=2)
+    fig.update_xaxes(range=[0, 220], dtick=20, tickvals=list(range(0, 141, 20)), row=1, col=2)
 
     # Update y_range
     fig.update_yaxes(range=[0, 0.25], row=1, col=1)
@@ -330,7 +330,7 @@ def figure3():
     fig.update_traces(orientation='h', side='positive', width=5, points=False, row=1, col=2)
 
     fig.update_layout(height=900, width=800,
-                      title_font=dict(size=24),
+                      font=dict(size=24),
                       xaxis1=dict(title='<b>Time (Months)<b>', title_font=dict(size=20)),
                       xaxis2=dict(title='<b>Time to Recover (Months)<b>', title_font=dict(size=20)),
                       xaxis3=dict(title='<b>Time (Months)<b>', title_font=dict(size=20)),
@@ -340,7 +340,7 @@ def figure3():
                       yaxis3=dict(title='<b>Recovery Probability<b>', title_font=dict(size=20)),
                       yaxis4=dict(title='<b>Recovery Probability<b>', title_font=dict(size=20)),
                       legend_tracegroupgap=200,
-                      legend_x=-0.25)
+                      legend_x=-0.3)
 
     st.plotly_chart(fig)
 
