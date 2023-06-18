@@ -334,11 +334,12 @@ def figure3():
                       xaxis2=dict(title='<b>Time to Recover (Months)<b>', title_font=dict(size=20)),
                       xaxis3=dict(title='<b>Time (Months)<b>', title_font=dict(size=20)),
                       xaxis4=dict(title='<b>Time (Months)<b>', title_font=dict(size=20)),
-                      yaxis1=dict(title='<b>Recovery Probability<b>', title_font=dict(size=20)),
+                      yaxis1=dict(title='<b>Recovery Probability<b>', title_font=dict(size=18)),
                       yaxis2_title='',
-                      yaxis3=dict(title='<b>Recovery Probability<b>', title_font=dict(size=20)),
-                      yaxis4=dict(title='<b>Recovery Probability<b>', title_font=dict(size=20)),
+                      yaxis3=dict(title='<b>Recovery Probability<b>', title_font=dict(size=18)),
+                      yaxis4=dict(title='<b>Recovery Probability<b>', title_font=dict(size=18)),
                       legend_tracegroupgap=200,
+                      legend_font=dict(size=16),  # Increase the legends' font size
                       legend_x=-0.3)
 
     st.plotly_chart(fig)
