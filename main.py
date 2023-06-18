@@ -295,6 +295,7 @@ def figure3():
 
     col1, col2, col3 = st.columns(3)
     st.markdown("<h4 style='text-align: left;'>Kaplan-Meier Recovery Estimates and Recovery Time Distribution charts</h4>", unsafe_allow_html=True)
+    st.markdown("<h6 style='text-align: left;'>Only groups with more than 1 patients were added</h6>", unsafe_allow_html=True)
 
     with col1:
         age_dict = build_st_query_for_ridge_charts(
@@ -354,10 +355,6 @@ def figure3():
                       legend_tracegroupgap=180,
                       legend_font=dict(size=14),  # Increase the legends' font size
                       legend_x=-0.35)
-    
-    fig.add_annotation(text="Only groups with more than 1 patients were added", x=1, y=25, xanchor="left",
-                       yanchor="top",
-                       font=dict(size=14, color="black"), showarrow=False, row=1, col=2)
 
 
 
