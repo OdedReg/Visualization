@@ -342,6 +342,12 @@ def figure3():
     create_km_graph('Race', race_dict, fig, 2, 1)
     create_km_graph('Marital Status', marital_dict, fig, 3, 1)
 
+    age_list = [key for key, val in age_dict.items() if val]
+    if age_list:
+        tracegroupgap = 180
+    else:
+        tracegroupgap = 220
+
     # Update x_range
     fig.update_xaxes(range=[0, 60], row=1, col=1)
     fig.update_xaxes(range=[0, 60], row=2, col=1)
@@ -366,7 +372,7 @@ def figure3():
                       yaxis2_title='',
                       yaxis3=dict(title='<b>Recovery Probability<b>', title_font=dict(size=18)),
                       yaxis4=dict(title='<b>Recovery Probability<b>', title_font=dict(size=18)),
-                      legend_tracegroupgap=180,
+                      legend_tracegroupgap=tracegroupgap,
                       legend_font=dict(size=14),  # Increase the legends' font size
                       legend_x=-0.35)
 
