@@ -278,7 +278,7 @@ def create_km_graph(name, name_dict, fig, row, col):
                 line=dict(shape='hv', width=3, color=color_palette[i]),
                 name=value,
                 legendgroup=legendgroup,
-                legendgrouptitle= dict(text=f'{name}', font=dict(size=18))
+                legendgrouptitle=dict(text=f'{name}', font=dict(size=18, weight='bold'))
             ), row=row, col=col)
 
 
@@ -287,7 +287,7 @@ def figure3():
     st.markdown('### Select Characteristics')
 
     col1, col2, col3 = st.columns(3)
-    st.subheader("#### Kaplan-Meier Recovery Estimates and Recovery Time Distribution charts")
+    st.subheader("Kaplan-Meier Recovery Estimates and Recovery Time Distribution charts")
 
     with col1:
         age_dict = build_st_query_for_ridge_charts(
@@ -346,7 +346,7 @@ def figure3():
                       yaxis4=dict(title='<b>Recovery Probability<b>', title_font=dict(size=18)),
                       legend_tracegroupgap=180,
                       legend_font=dict(size=14),  # Increase the legends' font size
-                      legend_x=-0.3)
+                      legend_x=-0.35)
 
     st.plotly_chart(fig)
 
