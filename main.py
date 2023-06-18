@@ -211,12 +211,12 @@ def create_ridge(age_dict, race_dict, marital_dict, fig, row_fig, col):
             annotation = dict(
                 xref='x',
                 yref='y',
-                x=135,
+                x=0,
                 y=i * 1,
                 text=name,
                 showarrow=False,
                 font=dict(color='black'),
-                xanchor='left'
+                xanchor='right'
             )
             fig.add_annotation(annotation, row=row_fig, col=col)
 
@@ -334,7 +334,7 @@ def figure3():
                       legend_x=-0.2
                       )
 
-    st.plotly_chart(fig,use_container_width = True)
+    st.plotly_chart(fig)
 
 
 st.markdown("""
