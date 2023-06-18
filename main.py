@@ -339,8 +339,9 @@ def figure3():
                       yaxis3=dict(title='<b>Recovery Probability<b>', title_font=dict(size=18)),
                       yaxis4=dict(title='<b>Recovery Probability<b>', title_font=dict(size=18)),
                       legend_tracegroupgap=180,
-                      legend_title=dict(size=16),  # Increase the legends' font size
-                      legend_font=dict(size=16),  # Increase the legends' font size
+                      legend_font=dict(size=14),  # Increase the legends' font size
+                      legend=dict(title=dict(font=dict(size=16))),  # Increase the legend title size
+
                       legend_x=-0.3)
 
     st.plotly_chart(fig)
