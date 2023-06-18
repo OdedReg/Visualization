@@ -211,7 +211,7 @@ def create_ridge(age_dict, race_dict, marital_dict, fig, row_fig, col):
             annotation = dict(
                 xref='x',
                 yref='y',
-                x=135,
+                x=155,
                 y=i * 1,
                 text=name,
                 showarrow=False,
@@ -321,8 +321,7 @@ def figure3():
     # Violin positive
     fig.update_traces(orientation='h', side='positive', width=5, points=False, row=1, col=2)
 
-    fig.update_layout(height=900, width=1000,
-                      
+    fig.update_layout(height=900, width=900,
                       xaxis1_title='Time (Months)',
                       xaxis2_title='Time to Recover (Months)',
                       xaxis3_title='Time (Months)',
