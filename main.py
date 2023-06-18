@@ -313,7 +313,7 @@ def figure3():
 
     fig = make_subplots(
         rows=3, cols=2,
-        subplot_titles=("", "--Dashed line represents the average recovery time\nOnly groups with more than 1 patients were added", "", ""),
+        subplot_titles=("", "--Dashed line represents the average recovery time", "", ""),
         specs=[[{}, {"rowspan": 3}],
                [{}, None],
                [{}, None]],
@@ -354,6 +354,12 @@ def figure3():
                       legend_tracegroupgap=180,
                       legend_font=dict(size=14),  # Increase the legends' font size
                       legend_x=-0.35)
+    
+    fig.add_annotation(text="Only groups with more than 1 patients were added", x=1, y=25, xanchor="left",
+                       yanchor="top",
+                       font=dict(size=14, color="black"), showarrow=False, row=1, col=2)
+
+
 
     st.plotly_chart(fig)
 
