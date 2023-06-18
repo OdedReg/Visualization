@@ -277,7 +277,7 @@ def figure3():
 
     with col1:
         age_dict = build_st_query_for_ridge_charts(
-            "Age", ['30-39', '40-49', '50-59', '60-69']
+            "Age", ['60-69', '50-59', '40-49', '30-39']
         )
 
     with col2:
