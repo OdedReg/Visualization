@@ -152,7 +152,7 @@ def build_two_y_axis_chart():
         marker=dict(color='lightseagreen')
     ))
 
-    fig.update_layout(height=400, width=800,
+    fig.update_layout(height=500, width=800,
         xaxis=dict(title='<b>Race<b>', title_font=dict(size=22), tickfont=dict(size=16)),
         yaxis=dict(title='<b>Malignancy Rate (%)</b>', title_font=dict(size=22), tickfont=dict(size=16)),
         yaxis2=dict(title='<b>Average Tumor Size (mm)<b>', overlaying='y', side='right', title_font=dict(size=22)),
