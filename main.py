@@ -211,7 +211,7 @@ def create_ridge(age_dict, race_dict, marital_dict, fig, row_fig, col):
             annotation = dict(
                 xref='x',
                 yref='y',
-                x=155,
+                x=150,
                 y=i * 1,
                 text=name,
                 showarrow=False,
