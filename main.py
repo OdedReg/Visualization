@@ -225,7 +225,7 @@ def create_ridge(age_dict, race_dict, marital_dict, fig, row_fig, col):
                 name += f'{marital_status},'
             values = survived_copy['Survival Months']
             name = name[:len(name) - 1]
-            fig.add_trace(go.Violin(x=values, fillcolor=colors[i], line_color='black', name=name, showlegend=False,
+            fig.add_trace(go.Violin(x=values, line_color=colors[i], name=name, showlegend=False,
                                     meanline_visible=True, legendgroup='1'), row=row_fig, col=col)
 
             annotation = dict(
