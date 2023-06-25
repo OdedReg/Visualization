@@ -42,11 +42,11 @@ def build_st_query_for_ridge_charts(title: str, options: list):
     checkbox_states = {}
     # Add "Select All" checkbox
     if title == 'Age':
-        select_all = st.checkbox("All Ages")
+        select_all = st.checkbox("All Ages", value=True)
     elif title == 'Race':
-        select_all = st.checkbox("All Races")
+        select_all = st.checkbox("All Races", value=True)
     else:
-        select_all = st.checkbox("All Marital Statuses")
+        select_all = st.checkbox("All Marital Statuses", value=True)
     checkbox_states = {}  # Dictionary to store checkbox states
 
     if select_all:
@@ -242,7 +242,7 @@ def create_ridge(age_dict, race_dict, marital_dict, fig, row_fig, col):
 
             i += 1
     else:
-        fig.add_trace(go.Violin(visible='legendonly', showlegend=False))
+        fig.add_trace(go.Violin())
 
 
 
